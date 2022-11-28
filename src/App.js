@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+// import { Audiobooks, BookDetail, Books, Checkout, Home, Magazine, Recommended, Sale, Textbooks } from './pages';
+
+import { Author, Category, Publisher } from './pages/dashboard'
+
+// import { ForgotPassword, Login, Logout, Register, ResetPassword } from './pages/auth'
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path="/category" element={<Category />} />
+        <Route path="/author" element={<Author />} />
+        <Route path="/publisher" element={<Publisher />} />
+      </Routes>
+      <ToastContainer
+        position={toast.POSITION.TOP_RIGHT}
+        autoClose={3000}
+        icon
+      />
     </div>
   );
 }
