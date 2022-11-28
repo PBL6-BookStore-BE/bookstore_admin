@@ -18,7 +18,7 @@ function App() {
         autoClose={3000}
         icon
       />
-    // </div>
+    </div>
   );
 }
 
