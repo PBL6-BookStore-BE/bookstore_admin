@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
-// import { Audiobooks, BookDetail, Books, Checkout, Home, Magazine, Recommended, Sale, Textbooks } from './pages';
 
 import { Author, Category, Publisher } from './pages/dashboard'
 
@@ -11,18 +10,18 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/category" element={<Category />} />
-        <Route path="/author" element={<Author />} />
-        <Route path="/publisher" element={<Publisher />} />
-      </Routes>
-      <ToastContainer
-        position={toast.POSITION.TOP_RIGHT}
-        autoClose={3000}
-        icon
-      />
-    </div>
+    // <div className="App">
+    //   <Routes>
+    //     <Route path="/category" element={<Category />} />
+    //     <Route path="/author" element={<Author />} />
+    //     <Route path="/publisher" element={<Publisher />} />
+    //   </Routes>
+    //   <ToastContainer
+    //     position={toast.POSITION.TOP_RIGHT}
+    //     autoClose={3000}
+    //     icon
+    //   />
+    // </div>
   );
 }
 
