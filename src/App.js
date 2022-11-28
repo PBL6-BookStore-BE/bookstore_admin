@@ -1,24 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
 
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+
+import { Author, Category, Publisher } from './pages/dashboard'
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Editttt <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Routes>
+        <Route path="/category" element={<Category />} />
+        <Route path="/author" element={<Author />} />
+        <Route path="/publisher" element={<Publisher />} />
+      </Routes>
+      <ToastContainer
+        position={toast.POSITION.TOP_RIGHT}
+        autoClose={3000}
+        icon
+      />
+    // </div>
   );
 }
 
