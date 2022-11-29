@@ -3,12 +3,14 @@ import { authReducer } from "./cases/auth/slice";
 import { getAllReducer } from "./cases/getAll/slice";
 import categoryReducer from "./cases/category/slice";
 import authorReducer from "./cases/author/slice";
+import bookReducer from "./cases/book/slice";
 
 const combinedReducer = combineReducers({
   auth: authReducer,
   getAll: getAllReducer,
   category: categoryReducer,
   author: authorReducer,
+  book: bookReducer
 });
 
 const rootReducer = (state, action) => {
