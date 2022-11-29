@@ -32,9 +32,7 @@ const Category = () => {
     }
   return (
     <div>
-        <Header />
         <VStack align='flex-start' spacing={8} >
-            <Text fontWeight='bold' mt={4}>Category</Text>
             <SearchAdmin 
                 phInput='Search by category type'
                 phSelect='Category'

@@ -8,9 +8,7 @@ const Publisher = () => {
     const [ isModalOpen, setIsModalOpen ] = useState(false)
   return (
     <div >
-        <Header />
         <VStack align='flex-start' spacing={8} >
-            <Text fontWeight='bold' mt={4}>Category</Text>
             <Grid 
                 templateColumns="repeat(10, 1fr)" 
                 gap={6} 

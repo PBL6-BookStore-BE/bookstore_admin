@@ -9,13 +9,18 @@ const initialState = {
   authors: {
     isFetching: false,
     data: [],
-  }
+  },
+  isSidebarOpen: false,
+
 };
 
 export const getAllSlice = createSlice({
   name: "getAll",
   initialState,
   reducers: {
+    toggleSidebar:(state) => {
+      state.isSidebarOpen = !state.isSidebarOpen;
+    }, 
     showLoading: (state) => {
       state.categories.isFetching = true;
       state.authors.isFetching = true;
@@ -50,6 +55,6 @@ export const getAllSlice = createSlice({
   },
 });
 
-export const { showLoading, hideLoading} = getAllSlice.actions;
+export const { showLoading, hideLoading, toggleSidebar } = getAllSlice.actions;
 
 export const getAllReducer = getAllSlice.reducer;

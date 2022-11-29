@@ -31,9 +31,7 @@ const Author = () => {
     }
   return (
     <div>
-        <Header />
-        <VStack align='flex-start' spacing={8} >
-            <Text fontWeight='bold' mt={4}>Author</Text>
+        <VStack align='flex-start' spacing={8}>
             <SearchAdmin 
                 phInput='Search by author name'
                 phSelect='Author'
