@@ -4,14 +4,21 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
-import { Author, Category, Publisher } from './pages/dashboard'
+import { Author, Book, Category, Orders, Publisher, Stats, SharedLayout } from './pages/dashboard'
+
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/category" element={<Category />} />
-        <Route path="/author" element={<Author />} />
-        <Route path="/publisher" element={<Publisher />} />
+        <Route path="/" element={<SharedLayout />} >
+          <Route index element={<Stats />} />
+          <Route path="category" element={<Category />} />
+          <Route path="author" element={<Author />} />
+          <Route path="publisher" element={<Publisher />} />
+          <Route path="book" element={<Book />} />
+          <Route path="orders" element={<Orders />} />
+
+        </Route>
       </Routes>
       <ToastContainer
         position={toast.POSITION.TOP_RIGHT}
@@ -21,5 +28,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
