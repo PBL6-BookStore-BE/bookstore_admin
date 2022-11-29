@@ -1,0 +1,29 @@
+.main-modal{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    display: none;
+} 
+.main-modal.active {
+    display: block;
+}
+.box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-left: 52px;
+    padding-right: 52px;
+    padding-bottom: 32px;
+    max-width: 50vw;
+    min-height: 50vh;
+    background: #fafafa;
+    border-radius: 7px;
+}
+
+
