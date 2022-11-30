@@ -9,7 +9,7 @@ export const createCateThunk = async (data, thunkAPI) => {
         const response = await createCate(data);
         thunkAPI.dispatch(getCategoryBySearch());
         thunkAPI.dispatch(listCategories());
-        return response.data
+        return response.data;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
     }

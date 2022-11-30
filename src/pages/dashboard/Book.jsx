@@ -8,19 +8,18 @@ import SearchAdmin from '../../components/SearchAdmin/SearchAdmin';
 import SingleAuthor from '../../components/SingleAuthor/SingleAuthor';
 import SingleBook from '../../components/SingleBook/SingleBook';
 import { toggleModalAdd } from '../../store/cases/book/slice';
-import { listAuthors, listBooks, listCategories } from '../../store/cases/getAll/action';
+import { listAuthors, listBooks, listCategories, listPublishers } from '../../store/cases/getAll/action';
 
 const Book = () => {
   const dispatch = useDispatch();
-  const { books } = useSelector((state) => state.getAll);
-  const { categories } = useSelector((state) => state.getAll);
-  const { authors } = useSelector((state) => state.getAll);
+  const { books, categories, authors, publishers } = useSelector((state) => state.getAll);
 
   const loadData = useCallback(async () => {
     try {
       dispatch(listBooks());
       dispatch(listCategories());
       dispatch(listAuthors());
+      dispatch(listPublishers());
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +67,7 @@ const Book = () => {
             </TableContainer>
 
         </VStack>
-        <FormAddBook categories={categories.data} authors={authors.data}/>
+        <FormAddBook categories={categories.data} authors={authors.data} publishers={publishers.data}/>
         <ModalDelete />
     </div>
   )

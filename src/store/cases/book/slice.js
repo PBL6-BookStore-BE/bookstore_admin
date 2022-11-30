@@ -9,7 +9,7 @@ const initialBookState = {
     publicationDate: '',
     idCategory: 0,
     idPublisher: 0,
-    idAuthors: "",
+    idAuthors: [],
     list_img: [],
     description: ''
   },
@@ -37,7 +37,7 @@ const bookSlice = createSlice({
           publicationDate: '',
           idCategory: null,
           idPublisher: null,
-          idAuthors: "",
+          idAuthors: [],
           list_img: [],
           description: ''
         }
@@ -55,6 +55,14 @@ const bookSlice = createSlice({
     addImageBook: (state, { payload }) => {
       state.addBook.list_img.push(payload)
     },
+    addIdAuthor: (state, action) => {
+      if (action.payload) {
+        state.addBook.idAuthors.push(action.payload.value);
+      }
+    },
+    removeIdAuthor: (state) => {
+      state.addBook.idAuthors = [];
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -63,7 +71,8 @@ const bookSlice = createSlice({
       })
       .addCase(createBook.fulfilled, (state) => {
         state.isLoading = false;
-        toast.success('Author Created');
+        state.isModalAddOpen = false;
+        toast.success('Book Created');
       })
       .addCase(createBook.rejected, (state) => {
         state.isLoading = false;
@@ -73,5 +82,5 @@ const bookSlice = createSlice({
   },
 });
 
-export const { handleChange, clearValues, setEditAuthor, toggleModalDelAuthor, toggleModalAdd, addImageBook } = bookSlice.actions;
+export const { handleChange, clearValues, setEditAuthor, toggleModalDelAuthor, toggleModalAdd, addImageBook, addIdAuthor, removeIdAuthor } = bookSlice.actions;
 export default bookSlice.reducer;

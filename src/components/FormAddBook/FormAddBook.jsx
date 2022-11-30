@@ -1,16 +1,16 @@
 import { CloseIcon } from '@chakra-ui/icons';
-import { Box, Button, Heading, HStack, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Text, useDisclosure, VStack } from '@chakra-ui/react';
-import React from 'react';
+import { Box, Button, Heading, HStack, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure, VStack } from '@chakra-ui/react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { createBook } from '../../apis/book.api';
-import { handleChange, clearValues,  createAuthor, editAuthor, toggleModalAdd } from '../../store/cases/book/slice';
+import { handleChange, clearValues, createBook, editAuthor, toggleModalAdd, addIdAuthor, removeIdAuthor } from '../../store/cases/book/slice';
 import UploadImage from '../UploadImage/UploadImage';
+import Select from 'react-select';
 
 const FormAddBook = (props) => {
   const dispatch = useDispatch();
   const { onClose } = useDisclosure();
-
+  const { publishers } = useSelector((state) => state.getAll);
   const { isLoading, addBook, isEditing, editAuthorId, isModalAddOpen } = useSelector((store) => store.book);
 
   const handleSubmit = (e) => {
@@ -24,29 +24,49 @@ const FormAddBook = (props) => {
       // dispatch(editAuthor({id: editAuthorId, name: nameAuthor, description: description}));
       return;
     }
-    const list_img = [];
-    addBook.list_img.map((img) => list_img.push(img.files));
-    const idAuthors = Number(addBook.idAuthors);
-
     dispatch(createBook({
-      Name: 'Test',
-      Description: 'Test',
-      IdAuthors: 3,
-      IdCategory: 2,
-      IdPublisher: 5,
-      Pages: 100,
-      Price: 100,
-      PublicationDate: '2022-10-27 09:21:08.787000',
-      list_img: '241255994_404479637728474_6465865513353177354_n.jpg;type=image/jpeg',
-    }))
+      Name: addBook.name,
+      Description: addBook.description,
+      IdAuthors: addBook.idAuthors,
+      IdCategory: Number(addBook.idCategory),
+      IdPublisher: Number(addBook.idPublisher),
+      Pages: Number(addBook.pages),
+      Price: Number(addBook.price),
+      PublicationDate: addBook.publicationDate,
+      list_img: addBook.list_img,
+    }));
   }
 
   const handleBookInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log(name, value);
     dispatch(handleChange({ name, value }));
   };
+
+  const options = [];
+  props.authors.map((author) => {
+    options.push({
+      value: author.id,
+      label: author.name,
+    });
+  });
+
+  const optionsCategory = [];
+  props.categories.map((category) => {
+    optionsCategory.push({
+      value: category.id,
+      label: category.name,
+    });
+  });
+
+  const optionsPublishers = [];
+  props.publishers.map((publisher) => {
+    optionsPublishers.push({
+      value: publisher.id,
+      label: publisher.name,
+    });
+  });
+
   return (
     <Modal isOpen={isModalAddOpen} onClose={onClose} motionPreset='slideInBottom' scrollBehavior='inside'size={'3xl'}>
       <ModalOverlay />
@@ -128,42 +148,57 @@ const FormAddBook = (props) => {
             </HStack>
             <HStack  w="100%" spacing="42px" mt={4}>
               <Text>Category</Text>
-              <Select
-                  id="idCategory"
-                  name="idCategory"
-                  placeholder='Category' 
-                  value={addBook.categories}
-                  onChange={handleBookInput}
-              >
-                {props.categories.map((category) => (
-                  <option key={category.id} value={category.id}>{category.name}</option>
-                ))}
-              </Select>
+              <Box w="100%">
+                <Select
+                    id="idCategory"
+                    name="idCategory"
+                    placeholder='Category'
+                    options={optionsCategory}
+                    className="basic-single"
+                    classNamePrefix="select"
+                    onChange={(event) => {
+                      const name = "idCategory";
+                      const value = event.value;
+                      dispatch(handleChange({ name, value }));
+                    }}
+                  />
+              </Box>
             </HStack>
             <HStack  w="100%" spacing="42px" mt={4}>
               <Text>Publisher</Text>
-              <Input
-                  id="idPublisher"
-                  name="idPublisher"
-                  placeholder='Publisher' 
-                  type="text"
-                  value={addBook.idPublisher}
-                  onChange={handleBookInput}
-              />
+              <Box w="100%">
+                <Select
+                    id="idPublisher"
+                    name="idPublisher"
+                    placeholder='Publisher'
+                    options={optionsPublishers}
+                    onChange={(event) => {
+                      const name = "idPublisher";
+                      const value = event.value;
+                      dispatch(handleChange({ name, value }));
+                    }}
+                />
+              </Box>
             </HStack>
             <HStack  w="100%" spacing="50px" mt={4}>
               <Text>Authors</Text>
-              <Select
-                  id="idAuthors"
-                  name="idAuthors"
-                  placeholder='Authors' 
-                  value={addBook.authors}
-                  onChange={handleBookInput}
-              >
-                {props.authors.map((author) => (
-                  <option key={author.id} value={author.id}>{author.name}</option>
-                ))}
-              </Select>
+              <Box w="100%">
+                <Select
+                    name="idAuthors"
+                    placeholder='Authors' 
+                    className="basic-multi-select"
+                    classNamePrefix="select"
+                    options={options}
+                    isMulti
+                    onChange={(event) => {
+                      if (event.length === 0) {
+                        dispatch(removeIdAuthor());
+                      } else {
+                        dispatch(addIdAuthor(event.slice(-1)[0]));
+                      }
+                    }}
+                />
+              </Box>
             </HStack>
             <HStack  w="100%" spacing={16} mt={4}>
               <Text>Image</Text>

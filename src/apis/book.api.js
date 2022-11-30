@@ -9,16 +9,19 @@ async function getBookById(id) {
 
 const createBook = (data) => {
     let formData = new FormData();
-    console.log(data.list_img);
     formData.append("Name", data.Name);
     formData.append("Description", data.Description);
-    formData.append("IdAuthors", data.IdAuthors);
     formData.append("IdCategory", data.IdCategory);
     formData.append("IdPublisher", data.IdPublisher);
     formData.append("Pages", data.Pages);
     formData.append("Price", data.Price);
     formData.append("PublicationDate", data.PublicationDate);
-    formData.append("list_img", data.list_img);
+    data.IdAuthors.forEach((item) => {
+        formData.append("IdAuthors[]", item)
+    });
+    data.list_img.forEach((item) => {
+        formData.append("list_img", item.files)
+    });
     return apiClient.post('/books', formData, {
         headers: {
           "content-Type": "multipart/form-data",
