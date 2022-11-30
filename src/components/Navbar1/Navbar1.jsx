@@ -17,7 +17,7 @@ const Navbar = () => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper style={{ zIndex: "10" }}>
       <div className="nav-center">
         <button type='button' className="toggle-btn" onClick={toggle}>
           <FaAlignLeft />
