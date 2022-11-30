@@ -34,7 +34,7 @@ const UploadImage = () => {
                 <Input id="upload-image" hidden type="file" accept="image/x-png,image/gif,image/jpeg" onChange={onFileChange} />
             </label>
             {addBook.list_img.map((img) => (
-                <ImagePreview value={img.src}/>
+                <ImagePreview key={img.filename} value={img.src}/>
             ))}
         </Box>
     );

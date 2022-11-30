@@ -1,14 +1,14 @@
 import { createCate, deleteCate, editCate } from '../../../apis/category.api';
+import { clearValues } from '../book/slice';
 import { listCategories } from '../getAll/action';
 import { hideLoading, showLoading } from '../getAll/slice';
-import { clearValues } from './slice';
 
 export const createCateThunk = async (data, thunkAPI) => {
     try {
         const response = await createCate(data);
         thunkAPI.dispatch(clearValues());
         thunkAPI.dispatch(listCategories());
-        return response.data
+        return response.data;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
     }
