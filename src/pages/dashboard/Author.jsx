@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { useDisclosure, TableContainer, Thead, Th, Tbody, Table, Tr, Td, VStack, Text, Input, Select, Button, Grid, GridItem} from "@chakra-ui/react";
+import { useDisclosure, TableContainer, Thead, Th, Tbody, Table, Tr, Td, VStack, Text, Input, Select, Button, Grid, GridItem, Heading} from "@chakra-ui/react";
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
 import Header from "../../components/Header/Header";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,15 +32,16 @@ const Author = () => {
   return (
     <div>
         <VStack align='flex-start' spacing={8}>
-            <SearchAdmin 
+            <Heading color='#8D28AD' size='lg'>Author</Heading>
+            {/* <SearchAdmin 
                 phInput='Search by author name'
                 phSelect='Author'
                 name='author'
                 list={authors}
                 button='+ Add Author'
                 modalAdd={toggleModalAdd()}
-            />
-            <TableContainer w='100%' borderRadius={6} backgroundColor='#FAFAFA'>
+            /> */}
+            <TableContainer w='91%' borderRadius={6} backgroundColor='#FAFAFA'>
                 <Table>
                     <Thead>
                         <Tr>

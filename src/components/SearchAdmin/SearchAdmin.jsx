@@ -1,36 +1,80 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { useDisclosure, TableContainer, Thead, Th, Tbody, Table, Tr, Td, VStack, Text, Input, Select, Button, Grid, GridItem} from "@chakra-ui/react";
 
-const SearchAdmin = ({ phInput, phSelect, name, list, button, modalAdd }) => {
-    const dispatch = useDispatch()
+import { Input, Select, Button, Grid, GridItem} from "@chakra-ui/react";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { listCategories } from "../../store/cases/getAll/action";
+import { clearValueSearch, clearValueSearchInSelect, handleChange } from "../../store/cases/getAll/slice";
+
+const SearchAdmin = ({ phInput, phSelect, nameInput, nameSelect, list, button, modalAdd, valueInput, valueSelect }) => {
+    const dispatch = useDispatch();
+    const [stateValueInput, setStateValueInput] = useState(false);
+
+    const handleSearch = (e) => {
+        dispatch(handleChange({ name: e.target.name, value: e.target.value }));
+    }; 
+    useEffect (() => {
+        if(valueInput !== ''){
+            setStateValueInput(true);
+            dispatch(clearValueSearchInSelect())
+        }
+        else{
+            setStateValueInput(false);
+            dispatch(clearValueSearch())
+        }
+    }, [valueInput, dispatch])
+    
   return (
     <Grid 
         templateColumns="repeat(10, 1fr)" 
         gap={6} 
-        backgroundColor='#FAFAFA'
-        pl={24}
         py={8}
         w='100%'
         borderRadius={6}
         mb={6}
     >
         <GridItem colSpan={4}>
-            <Input bgColor='#fff' py={6} placeholder={phInput}/>
+            <Input 
+                type="text" 
+                bgColor='#FAFAFA' 
+                name={nameInput} py={6} 
+                id={nameInput}
+                placeholder={phInput} 
+                value={valueInput}
+                onChange={handleSearch}
+            />
+                
         </GridItem>
         <GridItem colSpan={4}>
-            <Select 
-                name={name}
-                id={name}
-                placeholder={phSelect} 
-                bgColor='#fff' size='lg' fontSize='md'
+            {stateValueInput ?
+                <Select 
+                name={nameSelect}
+                id={nameSelect}
+                bgColor='#FAFAFA' size='lg' fontSize='md'
+                value={valueSelect}
+                placeholder={phSelect}
+                onChange={handleSearch}
+                disabled
             >
-                {list.data.map((item, index) => {
+                {list.map((item, index) => {
                     return (
                         <option value={item.name} key={item.id}>{item.name}</option>
                     )
                 })}
             </Select>
+            : <Select 
+                name={nameSelect}
+                id={nameSelect}
+                bgColor='#FAFAFA' size='lg' fontSize='md'
+                value={valueSelect}
+                placeholder={phSelect}
+                onChange={handleSearch}
+            >
+                {list.map((item, index) => {
+                    return (
+                        <option value={item.name} key={item.id}>{item.name}</option>
+                    )
+                })}
+            </Select>}
         </GridItem>
         <GridItem colSpan={1}>
             <Button 

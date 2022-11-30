@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { createCateThunk, deleteCateThunk, editCateThunk } from "./action";
+import { createCateThunk, deleteCateThunk, editCateThunk} from "./action";
 
 const initialState = {
     isLoading: false,

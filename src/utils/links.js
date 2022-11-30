@@ -3,7 +3,7 @@ import { GrUnorderedList, GrCompass, GrCatalog, GrUserWorker, GrHome } from "rea
 
 const links = [
     {id:1, text: 'Dashboard', path: '/', icon: <IoBarChartSharp />},
-    {id:2, text: 'Book', path: '/books', icon: <IoBook />},
+    {id:2, text: 'Book', path: '/book', icon: <IoBook />},
     {id:3, text: 'Author', path: '/author', icon: <IoPeople />},
     {id:4, text: 'Category', path: '/category', icon: <GrUnorderedList />},
     {id:5, text: 'Publisher', path: '/publisher', icon: <IoHome />},
