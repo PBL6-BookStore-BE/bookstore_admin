@@ -2,9 +2,9 @@ import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { Button, Td, Tr } from '@chakra-ui/react'
 import React from 'react'
 import { useDispatch} from 'react-redux'
-import { setEditCate, toggleModalAdd, toggleModalDel } from '../../store/cases/category/slice'
+import { setEditPublisher, toggleModalAdd, toggleModalDelPublisher } from '../../store/cases/publisher/slice'
 
-const SingleCategory = ({ id, name}) => {
+const SinglePublisher = ({ id, name}) => {
   const dispatch = useDispatch()
   return ( 
     <Tr key={id}>
@@ -12,27 +12,25 @@ const SingleCategory = ({ id, name}) => {
         <Td>{name}</Td>
         <Td mr={4}>
             <Button 
-                type="submit"
                 bgColor='#FAFAFA' 
                 _hover={{ 
                     color: '#8D28AD' 
                 }}
                 onClick={(e) => {
                     dispatch(toggleModalAdd())
-                    dispatch(setEditCate({editCateId: id, nameCate: name}))
+                    dispatch(setEditPublisher({editPublisherId: id, namePublisher: name}))
                 }}
             >
                 <EditIcon/>
             </Button>
             <Button 
-                type="submit"
                 bgColor='#FAFAFA'
                 _hover={{ 
                     color: '#f31b1bcb' 
                 }}
                 onClick={(e) => {
-                    dispatch(toggleModalDel())
-                    dispatch(setEditCate({editCateId: id, nameCate: name}))
+                    dispatch(toggleModalDelPublisher())
+                    dispatch(setEditPublisher({editPublisherId: id, namePublisher: name}))
                 }}
             >
                 <DeleteIcon/>
@@ -42,4 +40,4 @@ const SingleCategory = ({ id, name}) => {
   )
 }
 
-export default SingleCategory
+export default SinglePublisher

@@ -39,19 +39,28 @@ const Wrapper = styled.nav`
     gap: 0 0.5rem;
     position: relative;
     box-shadow: var(--shadow-2);
+    padding: 0.5rem;
+    border-radius: var(--borderRadius);
+    font-weight: 500;
+
+  }
+  .btn:hover{
+    background-color: #761793;
   }
 
   .dropdown {
     position: absolute;
-    top: 40px;
+    top: 60px;
     left: 0;
     width: 100%;
-    background: var(--primary);
+    background: #dbb4e8;
     box-shadow: var(--shadow-2);
     padding: 0.5rem;
     text-align: center;
     visibility: hidden;
     border-radius: var(--borderRadius);
+    color: var(--primary);
+    font-weight: 500;
   }
   .show-dropdown {
     visibility: visible;
@@ -59,10 +68,12 @@ const Wrapper = styled.nav`
   .dropdown-btn {
     background: transparent;
     border-color: transparent;
-    color: var(--white);
     letter-spacing: var(--letterSpacing);
     text-transform: capitalize;
     cursor: pointer;
+  }
+  .dropdown:hover {
+    opacity: 0.8;
   }
   .logo-text {
     display: none;

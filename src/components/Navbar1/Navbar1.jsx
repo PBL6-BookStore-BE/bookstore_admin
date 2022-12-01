@@ -24,7 +24,7 @@ const Navbar = () => {
         </button>
         <div>
           {/* <BookLogo /> */}
-          <Heading>Dashboard</Heading>
+          <Heading color='#8D28AD'>Dashboard</Heading>
         </div>
         <div className="btn-container">
           <button className="btn" type="button" onClick={() =>setShowLogout(!showLogout)}>
