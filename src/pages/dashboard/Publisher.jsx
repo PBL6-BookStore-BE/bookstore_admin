@@ -14,15 +14,16 @@ const Publisher = () => {
 
     const loadPublisher = useCallback(async () => {
         try {
-        dispatch(listPublishers());
+            dispatch(listPublishers());
         } catch (error) {
-        console.log(error);
+            console.log(error);
         }
     }, [dispatch]);
     
     useEffect(() => {
         loadPublisher();
     }, [loadPublisher]);
+
   return (
     <div >
         <VStack align='flex-start' spacing={8} >

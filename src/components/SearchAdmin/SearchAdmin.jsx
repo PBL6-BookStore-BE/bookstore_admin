@@ -1,8 +1,7 @@
 
 import { Input, Select, Button, Grid, GridItem} from "@chakra-ui/react";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { listCategories } from "../../store/cases/getAll/action";
 import { clearValueSearch, clearValueSearchInSelect, handleChange } from "../../store/cases/getAll/slice";
 
 const SearchAdmin = ({ phInput, phSelect, nameInput, nameSelect, list, button, modalAdd, valueInput, valueSelect }) => {
@@ -41,6 +40,7 @@ const SearchAdmin = ({ phInput, phSelect, nameInput, nameSelect, list, button, m
                 placeholder={phInput} 
                 value={valueInput}
                 onChange={handleSearch}
+                focusBorderColor='#8D28AD'
             />
                 
         </GridItem>
@@ -68,6 +68,7 @@ const SearchAdmin = ({ phInput, phSelect, nameInput, nameSelect, list, button, m
                 value={valueSelect}
                 placeholder={phSelect}
                 onChange={handleSearch}
+                focusBorderColor='#8D28AD'
             >
                 {list.map((item, index) => {
                     return (

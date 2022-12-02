@@ -41,4 +41,20 @@ export const getPublisherBySearchThunk = async(_, thunkAPI) => {
         return thunkAPI.rejectWithValue('There was an error');
     }
 };
+export const getAuthorBySearchThunk = async(_, thunkAPI) => {
+    const { authors } = thunkAPI.getState().getAll;
+    let url = `/searchauthor`;
+    if(authors.search) {
+        url = `/searchauthor?name=${authors.search}`
+    }
+    if(authors.searchInSelect) {
+        url = `/searchauthor?name=${authors.searchInSelect}`
+    }
+    try {
+        const response = await apiClient.get(url);
+        return response.data;
+    } catch (error) {
+        return thunkAPI.rejectWithValue('There was an error');
+    }
+};
 export { listCategories, listAuthors, listPublishers };

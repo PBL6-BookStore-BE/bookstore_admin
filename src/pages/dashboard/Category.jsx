@@ -10,10 +10,8 @@ import { listCategories } from '../../store/cases/getAll/action';
 
 const Category = () => {
   const dispatch = useDispatch();
-  const { categories} = useSelector((state) => state.getAll);
+  const { categories } = useSelector((state) => state.getAll);
   
-
-
   const loadCategory = useCallback(async () => {
     try {
       dispatch(listCategories());
@@ -40,7 +38,7 @@ const Category = () => {
               modalAdd={toggleModalAdd()}
               valueInput={categories.search}
               valueSelect={categories.searchInSelect}
-          />
+            />
             <CategoriesContainer />
         </VStack>
         <FormAddCate/>
