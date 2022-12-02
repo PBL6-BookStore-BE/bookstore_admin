@@ -1,5 +1,6 @@
 import { createCate, deleteCate, editCate } from '../../../apis/category.api';
-import { getCategoryBySearch, hideLoading, showLoading } from '../getAll/slice';
+import { listCategories } from '../getAll/action';
+import { getCategoryBySearch, hideLoading, showLoading, clearValueSearch, clearValueSearchInSelect } from '../getAll/slice';
 import { clearValues } from './slice';
 
 export const createCateThunk = async (data, thunkAPI) => {
@@ -7,6 +8,7 @@ export const createCateThunk = async (data, thunkAPI) => {
     try {
         const response = await createCate(data);
         thunkAPI.dispatch(getCategoryBySearch());
+        thunkAPI.dispatch(listCategories());
         return response.data
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
@@ -18,6 +20,9 @@ export const deleteCateThunk = async (dataId, thunkAPI) => {
     try {
         const response = await deleteCate(dataId);
         thunkAPI.dispatch(getCategoryBySearch());
+        thunkAPI.dispatch(listCategories());
+        thunkAPI.dispatch(clearValueSearch());
+        thunkAPI.dispatch(clearValueSearchInSelect());
         return response.data
     } catch (error) {
         thunkAPI.dispatch(hideLoading());
@@ -31,6 +36,9 @@ export const editCateThunk = async (data, thunkAPI) => {
         const response = await editCate(data);
         thunkAPI.dispatch(clearValues());
         thunkAPI.dispatch(getCategoryBySearch());
+        thunkAPI.dispatch(listCategories());
+        thunkAPI.dispatch(clearValueSearch());
+        thunkAPI.dispatch(clearValueSearchInSelect());
         return response.data
     } catch (error) {
         thunkAPI.dispatch(hideLoading());

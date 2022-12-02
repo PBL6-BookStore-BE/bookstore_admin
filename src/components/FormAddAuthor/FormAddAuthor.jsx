@@ -63,6 +63,7 @@ const FormAddAuthor = () => {
                     type="text"
                     value={nameAuthor}
                     onChange={handleAuthorInput}
+                    focusBorderColor='#8D28AD'
                 />
             </HStack>
             <HStack  w="100%" spacing={3}>
@@ -74,6 +75,7 @@ const FormAddAuthor = () => {
                 type="text"
                 value={description}
                 onChange={handleAuthorInput}
+                focusBorderColor='#8D28AD'
             />
             
             </HStack>

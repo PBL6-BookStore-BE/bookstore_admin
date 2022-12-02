@@ -98,7 +98,7 @@ export const getAllSlice = createSlice({
       })
       .addCase(listAuthors.fulfilled, (state, action) => {
         state.authors.isFetching = false;
-        state.authors.data = action.payload;
+        state.authors.dataInSelect = action.payload;
       })
       .addCase(listAuthors.rejected, (state) => {
         state.authors.isFetching = false;

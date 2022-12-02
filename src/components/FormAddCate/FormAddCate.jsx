@@ -62,6 +62,7 @@ const FormAddCate = () => {
             type="text"
             value={nameCate}
             onChange={handleCateInput}
+            focusBorderColor='#8D28AD'
           />
         </HStack>
         <HStack spacing={4} bgColor='#F0E4F4' p={[4, 6]} >
