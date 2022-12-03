@@ -7,7 +7,7 @@ import ImagePreview from './ImagePreview';
 
 const UploadImage = () => {
     const dispatch = useDispatch();
-    const { addBook } = useSelector((store) => store.book);
+    const { book } = useSelector((store) => store.book);
     const onFileChange = (event) => {
         const target = event.target;
         console.log(target.files[0]);
@@ -33,7 +33,7 @@ const UploadImage = () => {
                 </Button>
                 <Input id="upload-image" hidden type="file" accept="image/x-png,image/gif,image/jpeg" onChange={onFileChange} />
             </label>
-            {addBook.list_img.map((img) => (
+            {book.list_img.map((img) => (
                 <ImagePreview key={img.filename} value={img.src}/>
             ))}
         </Box>

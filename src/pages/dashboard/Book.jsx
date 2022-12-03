@@ -1,5 +1,5 @@
 import { Table, TableContainer, Tbody, Th, Thead, Tr, VStack } from '@chakra-ui/react';
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import FormAddBook from '../../components/FormAddBook/FormAddBook';
 import Loading from '../../components/Loading/Loading';
@@ -13,6 +13,7 @@ import { listAuthors, listBooks, listCategories, listPublishers } from '../../st
 const Book = () => {
   const dispatch = useDispatch();
   const { books, categories, authors, publishers } = useSelector((state) => state.getAll);
+  // const [bookData, setBookData] = useState(books?.data);
 
   const loadData = useCallback(async () => {
     try {
@@ -59,7 +60,7 @@ const Book = () => {
                     <Tbody>
                         {books.data.map((item) => {
                             return (
-                                <SingleBook key={item.id} {...item} />
+                                <SingleBook key={item.id} data={item} categories={categories.data} publishers={publishers.data} authors={authors.data}/>
                             )
                         })}
                     </Tbody>

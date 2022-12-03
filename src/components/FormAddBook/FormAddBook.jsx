@@ -2,38 +2,49 @@ import { CloseIcon } from '@chakra-ui/icons';
 import { Box, Button, Heading, HStack, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure, VStack } from '@chakra-ui/react';
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
-import { handleChange, clearValues, createBook, editAuthor, toggleModalAdd, addIdAuthor, removeIdAuthor } from '../../store/cases/book/slice';
+import { handleChange, clearValues, createBook, updateBook, toggleModalAdd, addIdAuthor, removeIdAuthor } from '../../store/cases/book/slice';
 import UploadImage from '../UploadImage/UploadImage';
 import Select from 'react-select';
 
 const FormAddBook = (props) => {
   const dispatch = useDispatch();
   const { onClose } = useDisclosure();
-  const { publishers } = useSelector((state) => state.getAll);
-  const { isLoading, addBook, isEditing, editAuthorId, isModalAddOpen } = useSelector((store) => store.book);
+  const { isLoading, book, isEditing, editBookId, isModalAddOpen } = useSelector((store) => store.book);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if(!addBook.name || !addBook.description ||
-    //   !addBook.price || !addBook.pages || !addBook.idCategory || !addBook.idAuthors){
+    // if(!book.name || !book.description ||
+    //   !book.price || !book.pages || !book.idCategory || !book.idAuthors){
     //   toast.error("Please fill out all fields");
     //   return;
     // }
     if(isEditing){
+      const updateData = {
+        // ...book,
+        name: book.name,
+        price: Number(book.price),
+        pages: Number(book.pages),
+        publicationDate: book.publicationDate,
+        idCategory: book.idCategory,
+        idPublisher: book.idPublisher,
+        description: book.description,
+        id: editBookId
+      }
+      console.log(updateData);
+      dispatch(updateBook(updateData));
       // dispatch(editAuthor({id: editAuthorId, name: nameAuthor, description: description}));
       return;
     }
     dispatch(createBook({
-      Name: addBook.name,
-      Description: addBook.description,
-      IdAuthors: addBook.idAuthors,
-      IdCategory: Number(addBook.idCategory),
-      IdPublisher: Number(addBook.idPublisher),
-      Pages: Number(addBook.pages),
-      Price: Number(addBook.price),
-      PublicationDate: addBook.publicationDate,
-      list_img: addBook.list_img,
+      Name: book.name,
+      Description: book.description,
+      IdAuthors: book.idAuthors,
+      IdCategory: Number(book.idCategory),
+      IdPublisher: Number(book.idPublisher),
+      Pages: Number(book.pages),
+      Price: Number(book.price),
+      PublicationDate: book.publicationDate,
+      list_img: book.list_img,
     }));
   }
 
@@ -54,8 +65,8 @@ const FormAddBook = (props) => {
   const optionsCategory = [];
   props.categories.map((category) => {
     optionsCategory.push({
-      value: category.id,
-      label: category.name,
+      value: category?.id,
+      label: category?.name,
     });
   });
 
@@ -67,8 +78,21 @@ const FormAddBook = (props) => {
     });
   });
 
+  const defaultValue = (value, options) => {
+    const index = options.findIndex((element) => element.value === value);
+    return index;
+  }
+
+  const listAuthors = () => {
+    const listAuthors = [];
+    book.idAuthors?.map((item) => {
+      listAuthors.push(options[defaultValue(item, options)])
+    })
+    return listAuthors;
+  }
+
   return (
-    <Modal isOpen={isModalAddOpen} onClose={onClose} motionPreset='slideInBottom' scrollBehavior='inside'size={'3xl'}>
+    <Modal isOpen={isModalAddOpen} onClose={onClose} motionPreset='slideInBottom' scrollBehavior='inside' size={'3xl'}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader display="flex" justifyContent='space-between' spacing={16} p={[4, 6]} pr={8} mb={6} bgColor='#F0E4F4'>
@@ -98,7 +122,7 @@ const FormAddBook = (props) => {
                   name="name"
                   placeholder='Book Name' 
                   type="text"
-                  value={addBook.name}
+                  value={book?.name}
                   onChange={handleBookInput}
               />
             </HStack>
@@ -109,7 +133,7 @@ const FormAddBook = (props) => {
                   name="description"
                   placeholder='Description' 
                   type="text"
-                  value={addBook.description}
+                  value={book.description}
                   onChange={handleBookInput}
               />
             </HStack>
@@ -120,7 +144,7 @@ const FormAddBook = (props) => {
                   name="price"
                   placeholder='Price' 
                   type="number"
-                  value={addBook.price}
+                  value={book.price}
                   onChange={handleBookInput}
               />
             </HStack>
@@ -131,7 +155,7 @@ const FormAddBook = (props) => {
                   name="pages"
                   placeholder='Pages' 
                   type="number"
-                  value={addBook.pages}
+                  value={book.pages}
                   onChange={handleBookInput}
               />
             </HStack>
@@ -142,7 +166,7 @@ const FormAddBook = (props) => {
                   name="publicationDate"
                   placeholder='Publication Date' 
                   type="date"
-                  value={addBook.publicationDate}
+                  value={book.publicationDate}
                   onChange={handleBookInput}
               />
             </HStack>
@@ -150,12 +174,13 @@ const FormAddBook = (props) => {
               <Text>Category</Text>
               <Box w="100%">
                 <Select
-                    id="idCategory"
-                    name="idCategory"
-                    placeholder='Category'
-                    options={optionsCategory}
                     className="basic-single"
                     classNamePrefix="select"
+                    id="idCategory"
+                    name="idCategory"
+                    defaultValue={optionsCategory[defaultValue(book.idCategory, optionsCategory)]}
+                    placeholder='Category'
+                    options={optionsCategory}
                     onChange={(event) => {
                       const name = "idCategory";
                       const value = event.value;
@@ -168,9 +193,12 @@ const FormAddBook = (props) => {
               <Text>Publisher</Text>
               <Box w="100%">
                 <Select
+                    className="basic-single"
+                    classNamePrefix="select"
                     id="idPublisher"
                     name="idPublisher"
                     placeholder='Publisher'
+                    defaultValue={optionsPublishers[defaultValue(book.idPublisher, optionsPublishers)]}
                     options={optionsPublishers}
                     onChange={(event) => {
                       const name = "idPublisher";
@@ -188,6 +216,7 @@ const FormAddBook = (props) => {
                     placeholder='Authors' 
                     className="basic-multi-select"
                     classNamePrefix="select"
+                    defaultValue={listAuthors()}
                     options={options}
                     isMulti
                     onChange={(event) => {
