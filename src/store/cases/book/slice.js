@@ -14,7 +14,7 @@ const initialBookState = {
     description: ''
   },
   isEditing: false,
-  editBookId: '',
+  bookId: '',
   isModalDelBookOpen: false,
   isModalAddOpen: false,
   isLoading: false,

@@ -61,7 +61,7 @@ const SingleBook = ({ data, categories, publishers, authors }) => {
                     }}
                     onClick={(e) => {
                         dispatch(toggleModalAdd())
-                        dispatch(setEditBook({editBookId: data.id, book: {
+                        dispatch(setEditBook({bookId: data.id, book: {
                             name: data.name,
                             price: data.price,
                             pages: data.pages,
@@ -83,7 +83,7 @@ const SingleBook = ({ data, categories, publishers, authors }) => {
                     }}
                     onClick={(e) => {
                         dispatch(toggleModalDelBook())
-                        dispatch(setEditBook({editBookId: data.id, nameBook: data.name }))
+                        dispatch(setEditBook({bookId: data.id, nameBook: data.name }))
                         // dispatch(setEditAuthor({editAuthorId: id, nameAuthor: name, description: description}))
                     }}
                 >
