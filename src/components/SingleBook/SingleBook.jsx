@@ -2,7 +2,7 @@ import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { AspectRatio, Button, Image, Td, Tooltip, Tr } from '@chakra-ui/react'
 import React from 'react'
 import { useDispatch} from 'react-redux'
-import { setEditBook, toggleModalAdd } from '../../store/cases/book/slice';
+import { setEditBook, toggleModalAdd, toggleModalDelBook } from '../../store/cases/book/slice';
 import { DetailsIcon } from '../icons';
 
 const SingleBook = ({ data, categories, publishers, authors }) => {
@@ -82,7 +82,8 @@ const SingleBook = ({ data, categories, publishers, authors }) => {
                         color: '#f31b1bcb' 
                     }}
                     onClick={(e) => {
-                        // dispatch(toggleModalDelAuthor())
+                        dispatch(toggleModalDelBook())
+                        dispatch(setEditBook({editBookId: data.id, nameBook: data.name }))
                         // dispatch(setEditAuthor({editAuthorId: id, nameAuthor: name, description: description}))
                     }}
                 >
