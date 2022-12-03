@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { createBookThunk } from "./action";
+import { createBookThunk, updateBookThunk } from "./action";
 const initialBookState = {
-  addBook: {
+  book: {
     name: '',
     price: 0,
     pages: 0,
@@ -14,23 +14,24 @@ const initialBookState = {
     description: ''
   },
   isEditing: false,
-  editAuthorId: '',
+  editBookId: '',
   isModalDelAuthorOpen: false,
   isModalAddOpen: false,
   isLoading: false,
 };
 
 export const createBook = createAsyncThunk('book/createBook', createBookThunk);
+export const updateBook = createAsyncThunk('book/updateBook', updateBookThunk)
 
 const bookSlice = createSlice({
   name: "book",
   initialState: initialBookState,
   reducers: {
     handleChange : (state, { payload: { name, value } }) => {
-      state.addBook[name] = value;
+      state.book[name] = value;
     },
     clearValues: (state) => {
-        state.addBook = {
+        state.book = {
           name: '',
           price: null,
           pages: null,
@@ -42,7 +43,7 @@ const bookSlice = createSlice({
           description: ''
         }
     },
-    setEditAuthor: (state, { payload }) => {
+    setEditBook: (state, { payload }) => {
         return { ...state, isEditing: true, ...payload };
     }, 
     toggleModalDelAuthor: (state) => {
@@ -53,15 +54,15 @@ const bookSlice = createSlice({
         state.isEditing = false;
     },
     addImageBook: (state, { payload }) => {
-      state.addBook.list_img.push(payload)
+      state.book.list_img.push(payload)
     },
     addIdAuthor: (state, action) => {
       if (action.payload) {
-        state.addBook.idAuthors.push(action.payload.value);
+        state.book.idAuthors.push(action.payload.value);
       }
     },
     removeIdAuthor: (state) => {
-      state.addBook.idAuthors = [];
+      state.book.idAuthors = [];
     }
   },
   extraReducers: (builder) => {
@@ -78,9 +79,22 @@ const bookSlice = createSlice({
         state.isLoading = false;
         toast.success('Error');
       })
+      .addCase(updateBook.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateBook.fulfilled, (state) => {
+          state.isLoading = false;
+          state.isModalAddOpen = false;
+          toast.success('Book Modified...');
+          state.isEditing = !state.isEditing;
+      })
+      .addCase(updateBook.rejected, (state) => {
+          state.isLoading = false;
+          toast.error('Error');
+      });
 
   },
 });
 
-export const { handleChange, clearValues, setEditAuthor, toggleModalDelAuthor, toggleModalAdd, addImageBook, addIdAuthor, removeIdAuthor } = bookSlice.actions;
+export const { handleChange, clearValues, setEditBook, toggleModalDelAuthor, toggleModalAdd, addImageBook, addIdAuthor, removeIdAuthor } = bookSlice.actions;
 export default bookSlice.reducer;

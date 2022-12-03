@@ -28,8 +28,12 @@ const createBook = (data) => {
     }})
 }
 
+const updateBook = (data) => {
+    return apiClient.put(`/book/${data.id}`, data);
+}
 export {
     getListBook,
     getBookById,
-    createBook
+    createBook,
+    updateBook
 }
