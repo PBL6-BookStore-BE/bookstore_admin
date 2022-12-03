@@ -160,16 +160,6 @@ export const getAllSlice = createSlice({
       .addCase(listBooks.rejected, (state) => {
         state.books.isFetching = false;
       })
-      .addCase(listPublishers.pending, (state) => {
-        state.publishers.isFetching = true;
-      })
-      .addCase(listPublishers.fulfilled, (state, action) => {
-        state.publishers.isFetching = false;
-        state.publishers.data = action.payload;
-      })
-      .addCase(listPublishers.rejected, (state) => {
-        state.publishers.isFetching = false;
-      });
   },
 });
 

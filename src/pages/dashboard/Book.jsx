@@ -40,7 +40,7 @@ const Book = () => {
                 phInput='Search by book name'
                 phSelect='Category'
                 name='book'
-                list={categories}
+                list={categories.dataInSelect}
                 button='+ Add Book'
                 modalAdd={toggleModalAdd()}
             />
