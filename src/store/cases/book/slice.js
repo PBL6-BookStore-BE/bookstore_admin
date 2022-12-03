@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { createBookThunk, updateBookThunk } from "./action";
+import { createBookThunk, deleteBookThunk, updateBookThunk } from "./action";
 const initialBookState = {
   book: {
     name: '',
@@ -15,13 +15,15 @@ const initialBookState = {
   },
   isEditing: false,
   editBookId: '',
-  isModalDelAuthorOpen: false,
+  isModalDelBookOpen: false,
   isModalAddOpen: false,
   isLoading: false,
+  nameBook: '',
 };
 
 export const createBook = createAsyncThunk('book/createBook', createBookThunk);
 export const updateBook = createAsyncThunk('book/updateBook', updateBookThunk)
+export const deleteBook = createAsyncThunk('book/deleteBook', deleteBookThunk);
 
 const bookSlice = createSlice({
   name: "book",
@@ -46,8 +48,8 @@ const bookSlice = createSlice({
     setEditBook: (state, { payload }) => {
         return { ...state, isEditing: true, ...payload };
     }, 
-    toggleModalDelAuthor: (state) => {
-        state.isModalDelAuthorOpen = !state.isModalDelAuthorOpen;
+    toggleModalDelBook: (state) => {
+        state.isModalDelBookOpen = !state.isModalDelBookOpen;
     },
     toggleModalAdd: (state) => {
         state.isModalAddOpen = !state.isModalAddOpen;
@@ -91,10 +93,23 @@ const bookSlice = createSlice({
       .addCase(updateBook.rejected, (state) => {
           state.isLoading = false;
           toast.error('Error');
-      });
+      })
+      .addCase(deleteBook.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteBook.fulfilled, (state) => {
+          state.isLoading = false;
+          state.isModalAddOpen = false;
+          toast.success('Book removed');
+          state.isModalDelBookOpen = !state.isModalDelBookOpen;
+      })
+      .addCase(deleteBook.rejected, (state) => {
+          state.isLoading = false;
+          toast.error('Error');
+      })
 
   },
 });
 
-export const { handleChange, clearValues, setEditBook, toggleModalDelAuthor, toggleModalAdd, addImageBook, addIdAuthor, removeIdAuthor } = bookSlice.actions;
+export const { handleChange, clearValues, setEditBook, toggleModalDelBook, toggleModalAdd, addImageBook, addIdAuthor, removeIdAuthor } = bookSlice.actions;
 export default bookSlice.reducer;

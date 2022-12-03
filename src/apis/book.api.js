@@ -31,9 +31,19 @@ const createBook = (data) => {
 const updateBook = (data) => {
     return apiClient.put(`/book/${data.id}`, data);
 }
+
+const deleteBook = (dataId) => {
+    let formData = new FormData();
+    formData.append("id", dataId);
+    return apiClient.delete(`/book/${dataId}`, formData, {
+        headers: {
+            "content-Type": "multipart/form-data",
+    }})
+}
 export {
     getListBook,
     getBookById,
     createBook,
-    updateBook
+    updateBook,
+    deleteBook
 }

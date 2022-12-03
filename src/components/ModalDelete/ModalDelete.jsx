@@ -6,24 +6,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteCate, toggleModalDel } from '../../store/cases/category/slice';
 import { deleteAuthor, toggleModalDelAuthor } from '../../store/cases/author/slice';
 import { deletePublisher, toggleModalDelPublisher } from '../../store/cases/publisher/slice';
+import { deleteBook, toggleModalDelBook } from '../../store/cases/book/slice';
 
 const ModalDelete = () => {
   const dispatch = useDispatch()
   const { isModalDelOpen, nameCate, editCateId } = useSelector((store) => store.category)
   const { isModalDelAuthorOpen, nameAuthor, description, editAuthorId } = useSelector((store) => store.author)
   const { isModalDelPublisherOpen, namePublisher, editPublisherId } = useSelector((store) => store.publisher)
+  const { isModalDelBookOpen, nameBook, editBookId } = useSelector((store) => store.book);
 
   return (
-    <div className={`${isModalDelOpen || isModalDelAuthorOpen || isModalDelPublisherOpen ? 'main-modal active' : 'main-modal'}`}>
+    <div className={`${isModalDelOpen || isModalDelAuthorOpen || isModalDelBookOpen || isModalDelPublisherOpen ? 'main-modal active' : 'main-modal'}`}>
       <Box className='box'>
           <DeleteIcon color='#f31b1bcb' w={7} h={7} mb={5} mt={16}/>
           <Heading size='md'>
             <Highlight 
               size='md'
-              query={nameCate || nameAuthor || namePublisher}
+              query={nameCate || nameAuthor || nameBook || namePublisher}
               styles={{color: '#f31b1bcb'}}
             >
-              {`Are You Sure! Want to Delete ${nameCate || nameAuthor || namePublisher} Record?`}
+              {`Are You Sure! Want to Delete ${nameCate || nameAuthor || nameBook || namePublisher} Record?`}
             </Highlight>
 
           </Heading>
@@ -38,7 +40,7 @@ const ModalDelete = () => {
                 backgroundColor: '#d3cad6'
               }}
               w={32}
-              onClick={(e) => nameCate ? dispatch(toggleModalDel()) : ( nameAuthor ? dispatch(toggleModalDelAuthor()) : dispatch(toggleModalDelPublisher()))}
+              onClick={(e) => nameCate? dispatch(toggleModalDel()) : (nameBook ? dispatch(toggleModalDelBook()) : ( nameAuthor ? dispatch(toggleModalDelAuthor()) : dispatch(toggleModalDelPublisher())))}
             >
               No, Keep it
             </Button>
@@ -49,7 +51,7 @@ const ModalDelete = () => {
                 backgroundColor: '#761793'
               }}
               w={32}
-              onClick={() => nameCate ? dispatch(deleteCate(editCateId)) : ( nameAuthor ? dispatch(deleteAuthor(editAuthorId)) : dispatch(deletePublisher(editPublisherId)))}
+              onClick={() => nameCate ? dispatch(deleteCate(editCateId)) : (nameBook ? dispatch(deleteBook(editBookId)) : ( nameAuthor ? dispatch(deleteAuthor(editAuthorId)) : dispatch(deletePublisher(editPublisherId))))}
             >
               Yes, Delete it
             </Button>
