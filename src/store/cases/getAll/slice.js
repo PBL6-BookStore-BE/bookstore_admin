@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { listAuthors, listCategories, listPublishers, getCategoryBySearchThunk, getPublisherBySearchThunk } from "./action";
+import { listAuthors, listCategories, listPublishers, getCategoryBySearchThunk, getPublisherBySearchThunk, getAuthorBySearchThunk } from "./action";
 
 const initialFiltersState = {
     search: '',
@@ -16,6 +16,9 @@ const initialState = {
   authors: {
     isFetching: false,
     data: [],
+    dataInSelect: [],
+    search: '',
+    searchInSelect: '',
   },
   publishers: {
     isFetching: false,
@@ -29,6 +32,7 @@ const initialState = {
 };
 export const getCategoryBySearch = createAsyncThunk('search/getCategoryBySearch', getCategoryBySearchThunk);
 export const getPublisherBySearch = createAsyncThunk('search/getPublisherBySearch', getPublisherBySearchThunk);
+export const getAuthorBySearch = createAsyncThunk('search/getAuthorBySearch', getAuthorBySearchThunk);
 
 export const getAllSlice = createSlice({
   name: "getAll",
@@ -39,23 +43,28 @@ export const getAllSlice = createSlice({
     }, 
     showLoading: (state) => {
       state.categories.isFetching = true;
+      state.publishers.isFetching = true;
       state.authors.isFetching = true;
     },
     hideLoading: (state) => {
       state.categories.isFetching = false;
+      state.publishers.isFetching = false;
       state.authors.isFetching = false;
     },
     handleChange: (state, { payload: { name, value }}) => {
         state.categories[name] = value;
         state.publishers[name] = value;
+        state.authors[name] = value;
     },
     clearValueSearch: (state) => {
       state.categories.search = ''
       state.publishers.search = ''
+      state.authors.search = ''
     },
     clearValueSearchInSelect: (state) => {
       state.categories.searchInSelect = ''
       state.publishers.searchInSelect = ''
+      state.authors.searchInSelect = ''
     }
   },
   extraReducers: (builder) => {
@@ -76,6 +85,10 @@ export const getAllSlice = createSlice({
       .addCase(getCategoryBySearch.fulfilled, (state, action) => {
         state.categories.isFetching = false;
         state.categories.data = action.payload;
+        state.authors.search = '';
+        state.authors.searchInSelect = '';
+        state.publishers.search = '';
+        state.publishers.searchInSelect = '';
       })
       .addCase(getCategoryBySearch.rejected, (state) => {
         state.categories.isFetching = false;
@@ -85,9 +98,23 @@ export const getAllSlice = createSlice({
       })
       .addCase(listAuthors.fulfilled, (state, action) => {
         state.authors.isFetching = false;
-        state.authors.data = action.payload;
+        state.authors.dataInSelect = action.payload;
       })
       .addCase(listAuthors.rejected, (state) => {
+        state.authors.isFetching = false;
+      })
+      .addCase(getAuthorBySearch.pending, (state) => {
+        state.authors.isFetching = true;
+      })
+      .addCase(getAuthorBySearch.fulfilled, (state, action) => {
+        state.authors.isFetching = false;
+        state.authors.data = action.payload;
+        state.categories.search = '';
+        state.categories.searchInSelect = '';
+        state.publishers.search = '';
+        state.publishers.searchInSelect = '';
+      })
+      .addCase(getAuthorBySearch.rejected, (state) => {
         state.authors.isFetching = false;
       })
       .addCase(listPublishers.pending, (state) => {
@@ -106,6 +133,10 @@ export const getAllSlice = createSlice({
       .addCase(getPublisherBySearch.fulfilled, (state, action) => {
         state.publishers.isFetching = false;
         state.publishers.data = action.payload;
+        state.categories.search = '';
+        state.categories.searchInSelect = '';
+        state.authors.search = '';
+        state.authors.searchInSelect = '';
       })
       .addCase(getPublisherBySearch.rejected, (state) => {
         state.publishers.isFetching = false;

@@ -62,6 +62,7 @@ const FormAddPublisher = () => {
             type="text"
             value={namePublisher}
             onChange={handlePubInput}
+            focusBorderColor='#8D28AD'
           />
         </HStack>
         <HStack spacing={4} bgColor='#F0E4F4' p={[4, 6]} >

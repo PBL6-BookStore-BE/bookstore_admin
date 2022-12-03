@@ -1,5 +1,6 @@
 import { createPublisher, deletePublisher, editPublisher } from '../../../apis/publisher.api';
-import { getPublisherBySearch, hideLoading, showLoading } from '../getAll/slice';
+import { listPublishers } from '../getAll/action';
+import { getPublisherBySearch, hideLoading, showLoading, clearValueSearch, clearValueSearchInSelect } from '../getAll/slice';
 import { clearValues } from './slice';
 
 export const createPublisherThunk = async (data, thunkAPI) => {
@@ -7,6 +8,7 @@ export const createPublisherThunk = async (data, thunkAPI) => {
     try {
         const response = await createPublisher(data);
         thunkAPI.dispatch(getPublisherBySearch());
+        thunkAPI.dispatch(listPublishers());
         return response.data
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
@@ -18,6 +20,9 @@ export const deletePublisherThunk = async (dataId, thunkAPI) => {
     try {
         const response = await deletePublisher(dataId);
         thunkAPI.dispatch(getPublisherBySearch());
+        thunkAPI.dispatch(listPublishers());
+        thunkAPI.dispatch(clearValueSearch());
+        thunkAPI.dispatch(clearValueSearchInSelect());
         return response.data
     } catch (error) {
         thunkAPI.dispatch(hideLoading());
@@ -31,6 +36,9 @@ export const editPublisherThunk = async (data, thunkAPI) => {
         const response = await editPublisher(data);
         thunkAPI.dispatch(clearValues());
         thunkAPI.dispatch(getPublisherBySearch());
+        thunkAPI.dispatch(listPublishers());
+        thunkAPI.dispatch(clearValueSearch());
+        thunkAPI.dispatch(clearValueSearchInSelect());
         return response.data
     } catch (error) {
         thunkAPI.dispatch(hideLoading());
