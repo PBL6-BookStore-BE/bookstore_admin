@@ -11,7 +11,7 @@ const SingleBook = ({ data, categories, publishers, authors }) => {
         const result = list?.filter(function (el) {
             return el.name === name;
         });
-        return Number(result[0].id);
+        return Number(result[0]?.id);
     }
     const getIdAuthors = (name, list) => {
         const result = [];
@@ -84,7 +84,6 @@ const SingleBook = ({ data, categories, publishers, authors }) => {
                     onClick={(e) => {
                         dispatch(toggleModalDelBook())
                         dispatch(setEditBook({bookId: data.id, nameBook: data.name }))
-                        // dispatch(setEditAuthor({editAuthorId: id, nameAuthor: name, description: description}))
                     }}
                 >
                     <DeleteIcon/>

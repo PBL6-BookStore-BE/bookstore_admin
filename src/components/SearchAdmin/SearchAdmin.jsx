@@ -21,7 +21,6 @@ const SearchAdmin = ({ phInput, phSelect, nameInput, nameSelect, list, button, m
             dispatch(clearValueSearch())
         }
     }, [valueInput, dispatch])
-    console.log(list)
   return (
     <Grid 
         templateColumns="repeat(10, 1fr)" 

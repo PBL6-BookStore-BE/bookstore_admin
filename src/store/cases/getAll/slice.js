@@ -31,10 +31,6 @@ const initialState = {
     isFetching: false,
     data: [],
   },
-  publishers: {
-    isFetching: false,
-    data: [],
-  },
   isSidebarOpen: false,
 };
 export const getCategoryBySearch = createAsyncThunk('search/getCategoryBySearch', getCategoryBySearchThunk);

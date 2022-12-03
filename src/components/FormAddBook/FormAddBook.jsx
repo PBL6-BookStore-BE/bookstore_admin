@@ -1,15 +1,16 @@
 import { CloseIcon } from '@chakra-ui/icons';
 import { Box, Button, Heading, HStack, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure, VStack } from '@chakra-ui/react';
-import React, { useCallback, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleChange, clearValues, createBook, updateBook, toggleModalAdd, addIdAuthor, removeIdAuthor } from '../../store/cases/book/slice';
 import UploadImage from '../UploadImage/UploadImage';
 import Select from 'react-select';
 
 const FormAddBook = (props) => {
-  const dispatch = useDispatch();
-  const { onClose } = useDisclosure();
   const { isLoading, book, isEditing, bookId, isModalAddOpen } = useSelector((store) => store.book);
+  const dispatch = useDispatch();
+  const [description, setDescription] = useState(book?.description);
+  const { onClose } = useDisclosure();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,6 +52,7 @@ const FormAddBook = (props) => {
   const handleBookInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
+    setDescription(value);
     dispatch(handleChange({ name, value }));
   };
 
@@ -133,7 +135,7 @@ const FormAddBook = (props) => {
                   name="description"
                   placeholder='Description' 
                   type="text"
-                  value={book.description}
+                  value={description}
                   onChange={handleBookInput}
               />
             </HStack>

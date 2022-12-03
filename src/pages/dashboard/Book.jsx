@@ -60,7 +60,7 @@ const Book = () => {
                     <Tbody>
                         {books.data.map((item) => {
                             return (
-                                <SingleBook key={item.id} data={item} categories={categories.data} publishers={publishers.data} authors={authors.data}/>
+                                <SingleBook key={item.id} data={item} categories={categories.dataInSelect} publishers={publishers.dataInSelect} authors={authors.dataInSelect}/>
                             )
                         })}
                     </Tbody>
@@ -68,7 +68,7 @@ const Book = () => {
             </TableContainer>
 
         </VStack>
-        <FormAddBook categories={categories.data} authors={authors.data} publishers={publishers.data}/>
+        <FormAddBook categories={categories.dataInSelect} authors={authors.dataInSelect} publishers={publishers.dataInSelect}/>
         <ModalDelete />
     </div>
   )
