@@ -9,7 +9,7 @@ import Select from 'react-select';
 const FormAddBook = (props) => {
   const dispatch = useDispatch();
   const { onClose } = useDisclosure();
-  const { isLoading, book, isEditing, editBookId, isModalAddOpen } = useSelector((store) => store.book);
+  const { isLoading, book, isEditing, bookId, isModalAddOpen } = useSelector((store) => store.book);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +28,7 @@ const FormAddBook = (props) => {
         idCategory: book.idCategory,
         idPublisher: book.idPublisher,
         description: book.description,
-        id: editBookId
+        id: bookId
       }
       console.log(updateData);
       dispatch(updateBook(updateData));

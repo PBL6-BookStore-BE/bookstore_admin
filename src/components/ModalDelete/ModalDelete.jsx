@@ -13,7 +13,7 @@ const ModalDelete = () => {
   const { isModalDelOpen, nameCate, editCateId } = useSelector((store) => store.category)
   const { isModalDelAuthorOpen, nameAuthor, description, editAuthorId } = useSelector((store) => store.author)
   const { isModalDelPublisherOpen, namePublisher, editPublisherId } = useSelector((store) => store.publisher)
-  const { isModalDelBookOpen, nameBook, editBookId } = useSelector((store) => store.book);
+  const { isModalDelBookOpen, nameBook, bookId } = useSelector((store) => store.book);
 
   return (
     <div className={`${isModalDelOpen || isModalDelAuthorOpen || isModalDelBookOpen || isModalDelPublisherOpen ? 'main-modal active' : 'main-modal'}`}>
@@ -51,7 +51,7 @@ const ModalDelete = () => {
                 backgroundColor: '#761793'
               }}
               w={32}
-              onClick={() => nameCate ? dispatch(deleteCate(editCateId)) : (nameBook ? dispatch(deleteBook(editBookId)) : ( nameAuthor ? dispatch(deleteAuthor(editAuthorId)) : dispatch(deletePublisher(editPublisherId))))}
+              onClick={() => nameCate ? dispatch(deleteCate(editCateId)) : (nameBook ? dispatch(deleteBook(bookId)) : ( nameAuthor ? dispatch(deleteAuthor(editAuthorId)) : dispatch(deletePublisher(editPublisherId))))}
             >
               Yes, Delete it
             </Button>
