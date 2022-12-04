@@ -52,7 +52,9 @@ const FormAddBook = (props) => {
   const handleBookInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setDescription(value);
+    if (name === "description") {
+      setDescription(value);
+    }
     dispatch(handleChange({ name, value }));
   };
 
