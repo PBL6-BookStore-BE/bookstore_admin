@@ -1,5 +1,5 @@
-import { Box, Button, filter, Grid, Select, GridItem, Input, Table, TableContainer, Tbody, Th, Thead, Tr, VStack } from '@chakra-ui/react';
-import React, { useCallback, useEffect, useState } from 'react'
+import { Box, Button, Grid, Select, GridItem, Input, Table, TableContainer, Tbody, Th, Thead, Tr, VStack } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import FormAddBook from '../../components/FormAddBook/FormAddBook';
 import Loading from '../../components/Loading/Loading';
@@ -53,8 +53,7 @@ const Book = () => {
 
   useEffect(() => {
     try {
-      if (bookData.length <= 0) {
-        console.log("fetching data");
+      if (books.data.length <= 0) {
         dispatch(listBooks()).then((res) => setBookData(res?.payload));
         dispatch(listCategories());
         dispatch(listAuthors());
@@ -63,7 +62,7 @@ const Book = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [bookData.length, dispatch]);
+  }, [books.data.length, dispatch]);
   
   useEffect(() => {
     setBookData(books.data);
