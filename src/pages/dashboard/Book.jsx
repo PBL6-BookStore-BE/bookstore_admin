@@ -20,17 +20,6 @@ const Book = () => {
     search: ""
   });
 
-  const loadData = useCallback(async () => {
-    try {
-      dispatch(listBooks()).then((res) => setBookData(res?.payload));
-      dispatch(listCategories());
-      dispatch(listAuthors());
-      dispatch(listPublishers());
-    } catch (error) {
-      console.log(error);
-    }
-  }, [dispatch]);
-
   const categoriesOptions = [];
   categoriesOptions.push({
     value: '',
@@ -42,7 +31,7 @@ const Book = () => {
       label: item.name
     });
   })
-  
+
   useEffect(() => {
     let data = books?.data;
     if (filter) {
@@ -63,8 +52,22 @@ const Book = () => {
   }, [filter]);
 
   useEffect(() => {
-    loadData();
-  }, [loadData]);
+    try {
+      if (bookData.length <= 0) {
+        console.log("fetching data");
+        dispatch(listBooks()).then((res) => setBookData(res?.payload));
+        dispatch(listCategories());
+        dispatch(listAuthors());
+        dispatch(listPublishers());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [bookData.length, dispatch]);
+  
+  useEffect(() => {
+    setBookData(books.data);
+  }, [books.data]);
 
   if (books.isFetching) {
       return <Loading />;
