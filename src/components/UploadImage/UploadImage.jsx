@@ -1,5 +1,5 @@
 import { LinkIcon } from '@chakra-ui/icons';
-import { Box, Button, Input } from '@chakra-ui/react';
+import { AspectRatio, Box, Button, Image, Input } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addImageBook } from '../../store/cases/book/slice';
@@ -33,8 +33,8 @@ const UploadImage = () => {
                 </Button>
                 <Input id="upload-image" hidden type="file" accept="image/x-png,image/gif,image/jpeg" onChange={onFileChange} />
             </label>
-            {book.list_img.map((img) => (
-                <ImagePreview key={img.filename} value={img.src}/>
+            {book.list_img.map((img, index) => (
+                <ImagePreview key={img.filename || index} value={img.src} src={img}/>
             ))}
         </Box>
     );

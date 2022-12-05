@@ -7,7 +7,7 @@ import UploadImage from '../UploadImage/UploadImage';
 import Select from 'react-select';
 
 const FormAddBook = (props) => {
-  const { isLoading, book, isEditing, bookId, isModalAddOpen } = useSelector((store) => store.book);
+  const { isLoading, book, isEditing, bookId, isModalAddOpen, isUpdateImage } = useSelector((store) => store.book);
   const dispatch = useDispatch();
   const [description, setDescription] = useState(book?.description);
   const { onClose } = useDisclosure();
@@ -26,10 +26,12 @@ const FormAddBook = (props) => {
         price: Number(book.price),
         pages: Number(book.pages),
         publicationDate: book.publicationDate,
+        idAuthors: book.idAuthors,
         idCategory: book.idCategory,
         idPublisher: book.idPublisher,
         description: book.description,
-        id: bookId
+        id: bookId,
+        list_img: isUpdateImage ? book.list_img : null,
       }
       console.log(updateData);
       dispatch(updateBook(updateData));

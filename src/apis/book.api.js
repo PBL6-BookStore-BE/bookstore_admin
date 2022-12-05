@@ -29,7 +29,11 @@ const createBook = (data) => {
 }
 
 const updateBook = (data) => {
-    return apiClient.put(`/book/${data.id}`, data);
+    return apiClient.put(`/book/${data.id}`, data, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
 }
 
 const deleteBook = (dataId) => {

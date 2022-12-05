@@ -19,6 +19,7 @@ const initialBookState = {
   isModalAddOpen: false,
   isLoading: false,
   nameBook: '',
+  isUpdateImage: false,
 };
 
 export const createBook = createAsyncThunk('book/createBook', createBookThunk);
@@ -56,7 +57,8 @@ const bookSlice = createSlice({
         state.isEditing = false;
     },
     addImageBook: (state, { payload }) => {
-      state.book.list_img.push(payload)
+      state.isUpdateImage = true;
+      state.book.list_img.push(payload);
     },
     addIdAuthor: (state, action) => {
       if (action.payload) {
@@ -65,6 +67,14 @@ const bookSlice = createSlice({
     },
     removeIdAuthor: (state) => {
       state.book.idAuthors = [];
+    },
+    removeImage: (state, action) => {
+      state.isUpdateImage = true;
+      if (action.payload.startsWith("data:image/")) {
+        state.book.list_img = state.book.list_img.filter((item) => item.src !== action.payload);
+      } else {
+        state.book.list_img = state.book.list_img.filter((item) => item !== action.payload);
+      }
     }
   },
   extraReducers: (builder) => {
@@ -87,6 +97,7 @@ const bookSlice = createSlice({
       .addCase(updateBook.fulfilled, (state) => {
           state.isLoading = false;
           state.isModalAddOpen = false;
+          state.isUpdateImage = false;
           toast.success('Book Modified...');
           state.isEditing = !state.isEditing;
       })
@@ -111,5 +122,5 @@ const bookSlice = createSlice({
   },
 });
 
-export const { handleChange, clearValues, setEditBook, toggleModalDelBook, toggleModalAdd, addImageBook, addIdAuthor, removeIdAuthor } = bookSlice.actions;
+export const { removeImage, handleChange, clearValues, setEditBook, toggleModalDelBook, toggleModalAdd, addImageBook, addIdAuthor, removeIdAuthor } = bookSlice.actions;
 export default bookSlice.reducer;

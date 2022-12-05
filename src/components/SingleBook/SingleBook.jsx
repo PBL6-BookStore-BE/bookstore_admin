@@ -69,7 +69,7 @@ const SingleBook = ({ data, categories, publishers, authors }) => {
                             idCategory: getId(data.categoryName, categories),
                             idPublisher: getId(data.publisherName, publishers),
                             idAuthors: getIdAuthors(data.authors, authors),
-                            list_img: [],
+                            list_img: data.urls,
                             description: data.description
                         }}))
                     }}
