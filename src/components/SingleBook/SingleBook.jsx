@@ -2,11 +2,13 @@ import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { AspectRatio, Button, Image, Td, Tooltip, Tr } from '@chakra-ui/react'
 import React from 'react'
 import { useDispatch} from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import { setEditBook, toggleModalAdd, toggleModalDelBook } from '../../store/cases/book/slice';
 import { DetailsIcon } from '../icons';
 
 const SingleBook = ({ data, categories, publishers, authors }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const getId = (name, list) => {
         const result = list?.filter(function (el) {
             return el.name === name;
@@ -24,6 +26,9 @@ const SingleBook = ({ data, categories, publishers, authors }) => {
             })
         })
         return result;
+    }
+    const handleOpenDetails = () => {
+        navigate(`/book/${data.id}`);
     }
     return ( 
         <Tr key={data.id}>
@@ -48,6 +53,7 @@ const SingleBook = ({ data, categories, publishers, authors }) => {
                         _hover={{ 
                             color: '#8D28AD' 
                         }}
+                        onClick={handleOpenDetails}
                     >
                         <DetailsIcon /> 
                     </Button>

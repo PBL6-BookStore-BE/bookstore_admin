@@ -20,6 +20,7 @@ const createBook = (data) => {
         formData.append("IdAuthors[]", item)
     });
     data.list_img.forEach((item) => {
+        console.log(item.files);
         formData.append("list_img", item.files)
     });
     return apiClient.post('/books', formData, {
@@ -29,9 +30,25 @@ const createBook = (data) => {
 }
 
 const updateBook = (data) => {
-    return apiClient.put(`/book/${data.id}`, data, {
+    let formData = new FormData();
+    formData.append("Name", data.name);
+    formData.append("Description", data.description);
+    formData.append("IdCategory", data.idCategory);
+    formData.append("IdPublisher", data.idPublisher);
+    formData.append("Pages", data.pages);
+    formData.append("Price", data.price);
+    formData.append("PublicationDate", data.publicationDate);
+    formData.append("Id", data.id);
+    data.idAuthors.forEach((item) => {
+        formData.append("IdAuthors[]", item)
+    });
+    data.list_img.forEach((item) => {
+        console.log(item);
+        formData.append("list_img", item)
+    });
+    return apiClient.put(`/book/${data.id}`, formData, {
         headers: {
-            'Content-Type': 'application/json'
+            "content-Type": "multipart/form-data",
         }
     });
 }

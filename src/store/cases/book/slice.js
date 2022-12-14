@@ -89,7 +89,7 @@ const bookSlice = createSlice({
       })
       .addCase(createBook.rejected, (state) => {
         state.isLoading = false;
-        toast.success('Error');
+        toast.error('Error');
       })
       .addCase(updateBook.pending, (state) => {
         state.isLoading = true;
@@ -101,8 +101,9 @@ const bookSlice = createSlice({
           toast.success('Book Modified...');
           state.isEditing = !state.isEditing;
       })
-      .addCase(updateBook.rejected, (state) => {
+      .addCase(updateBook.rejected, (state, action) => {
           state.isLoading = false;
+          console.log("Error: ", action);
           toast.error('Error');
       })
       .addCase(deleteBook.pending, (state) => {
@@ -115,7 +116,7 @@ const bookSlice = createSlice({
           state.isModalDelBookOpen = !state.isModalDelBookOpen;
       })
       .addCase(deleteBook.rejected, (state) => {
-          state.isLoading = false;
+          state.isLoading = true;
           toast.error('Error');
       })
 

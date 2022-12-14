@@ -1,6 +1,6 @@
 import { LinkIcon } from '@chakra-ui/icons';
-import { AspectRatio, Box, Button, Image, Input } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import { Box, Button, Input } from '@chakra-ui/react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addImageBook } from '../../store/cases/book/slice';
 import ImagePreview from './ImagePreview';
@@ -14,7 +14,6 @@ const UploadImage = () => {
         if (target.files && target.files?.length > 0) {
             const uploadedFileName = target.files[0].name.replace(/[^\w\-.]/g, '');
             const reader = new FileReader();
-            console.log(reader);
             reader.onload = () => {
                 dispatch(addImageBook({ src: reader.result, filename: uploadedFileName, files: target.files[0] }));
             }

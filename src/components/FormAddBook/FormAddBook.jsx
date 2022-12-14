@@ -1,10 +1,14 @@
 import { CloseIcon } from '@chakra-ui/icons';
 import { Box, Button, Heading, HStack, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure, VStack } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleChange, clearValues, createBook, updateBook, toggleModalAdd, addIdAuthor, removeIdAuthor } from '../../store/cases/book/slice';
 import UploadImage from '../UploadImage/UploadImage';
 import Select from 'react-select';
+import apiClient from '../../utils/apiClient';
+import imageToBase64 from 'image-to-base64/browser';
+import { urlToObject } from '../../utils/image';
+import { toast } from 'react-toastify';
 
 const FormAddBook = (props) => {
   const { isLoading, book, isEditing, bookId, isModalAddOpen, isUpdateImage } = useSelector((store) => store.book);
@@ -12,16 +16,45 @@ const FormAddBook = (props) => {
   const [description, setDescription] = useState(book?.description);
   const { onClose } = useDisclosure();
 
-  const handleSubmit = (e) => {
+  const convertListImage = (listImage) => {
+    const result = [];
+    listImage.map(async (item) => {
+      if(typeof item !== 'object') {
+        const set = new Set(Array.from([1]));
+        for (const element of set) {
+          result.push(urlToObject(element));
+        }
+      } else {
+        result.push(item);
+      }
+    })
+    return result;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // if(!book.name || !book.description ||
-    //   !book.price || !book.pages || !book.idCategory || !book.idAuthors){
-    //   toast.error("Please fill out all fields");
-    //   return;
-    // }
+    if(!book.name || !book.description ||
+      !book.price || !book.pages || !book.idCategory || !book.idAuthors || !book.list_img){
+      toast.error("Please fill out all fields");
+      return;
+    }
     if(isEditing){
+      let convertListImg = [];
+      await Promise.all(convertListImage(book.list_img)).then(values => {
+        convertListImg = values
+      }); 
+      let list_img = [];
+      convertListImg.forEach((item) => {
+        if (item.files) {
+            list_img.push(item.files);
+        }
+        else {
+            list_img.push(item);
+        }
+      }); 
+      console.log("list_img: ", list_img);
+      console.log("isUpdateImage", isUpdateImage);
       const updateData = {
-        // ...book,
         name: book.name,
         price: Number(book.price),
         pages: Number(book.pages),
@@ -31,11 +64,9 @@ const FormAddBook = (props) => {
         idPublisher: book.idPublisher,
         description: book.description,
         id: bookId,
-        list_img: isUpdateImage ? book.list_img : null,
+        list_img: isUpdateImage ? list_img : null,
       }
-      console.log(updateData);
       dispatch(updateBook(updateData));
-      // dispatch(editAuthor({id: editAuthorId, name: nameAuthor, description: description}));
       return;
     }
     dispatch(createBook({
@@ -139,7 +170,7 @@ const FormAddBook = (props) => {
                   name="description"
                   placeholder='Description' 
                   type="text"
-                  value={description}
+                  value={book?.description}
                   onChange={handleBookInput}
               />
             </HStack>
@@ -245,6 +276,7 @@ const FormAddBook = (props) => {
             className='btn'
             backgroundColor='#fafafa'  
             color='#636363' 
+            mr='2'
             _hover={{
               backgroundColor: '#F0E4F4',
               color: '#f31b1bcb',
@@ -261,6 +293,7 @@ const FormAddBook = (props) => {
             _hover={{
               backgroundColor: '#761793'
             }}
+            ml='2'
             isLoading={isLoading}
             disabled={isLoading}
             type="submit"
