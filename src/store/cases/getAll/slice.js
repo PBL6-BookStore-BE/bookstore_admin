@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { listAuthors, listCategories, listPublishers, getCategoryBySearchThunk, getPublisherBySearchThunk, getAuthorBySearchThunk } from "./action";
+import { listAuthors, listBooks, listCategories, listPublishers, getCategoryBySearchThunk, getPublisherBySearchThunk, getAuthorBySearchThunk } from "./action";
 
 const initialFiltersState = {
     search: '',
@@ -27,8 +27,11 @@ const initialState = {
     search: '',
     searchInSelect: '',
   },
+  books: {
+    isFetching: false,
+    data: [],
+  },
   isSidebarOpen: false,
-
 };
 export const getCategoryBySearch = createAsyncThunk('search/getCategoryBySearch', getCategoryBySearchThunk);
 export const getPublisherBySearch = createAsyncThunk('search/getPublisherBySearch', getPublisherBySearchThunk);
@@ -45,11 +48,13 @@ export const getAllSlice = createSlice({
       state.categories.isFetching = true;
       state.publishers.isFetching = true;
       state.authors.isFetching = true;
+      state.books.isFetching = true;
     },
     hideLoading: (state) => {
       state.categories.isFetching = false;
       state.publishers.isFetching = false;
       state.authors.isFetching = false;
+      state.books.isFetching = false;
     },
     handleChange: (state, { payload: { name, value }}) => {
         state.categories[name] = value;
@@ -140,7 +145,17 @@ export const getAllSlice = createSlice({
       })
       .addCase(getPublisherBySearch.rejected, (state) => {
         state.publishers.isFetching = false;
-      });
+      })
+      .addCase(listBooks.pending, (state) => {
+        state.books.isFetching = true;
+      })
+      .addCase(listBooks.fulfilled, (state, action) => {
+        state.books.isFetching = false;
+        state.books.data = action.payload;
+      })
+      .addCase(listBooks.rejected, (state) => {
+        state.books.isFetching = false;
+      })
   },
 });
 

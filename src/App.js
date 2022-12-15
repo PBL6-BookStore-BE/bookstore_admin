@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
 import { Author, Book, Category, Orders, Publisher, Stats, SharedLayout } from './pages/dashboard'
+import BookDetails from './pages/BookDetails/BookDetails';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="author" element={<Author />} />
           <Route path="publisher" element={<Publisher />} />
           <Route path="book" element={<Book />} />
+          <Route path='book/:id' element={<BookDetails />} />
           <Route path="order" element={<Orders />} />
 
         </Route>

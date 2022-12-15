@@ -1,5 +1,5 @@
 import { IoBarChartSharp, IoHome, IoBook, IoPeople, IoCompass } from 'react-icons/io5';
-import { GrUnorderedList, GrCompass, GrCatalog, GrUserWorker, GrHome } from "react-icons/gr";
+import { GrUnorderedList } from "react-icons/gr";
 
 const links = [
     {id:1, text: 'Dashboard', path: '/', icon: <IoBarChartSharp />},
