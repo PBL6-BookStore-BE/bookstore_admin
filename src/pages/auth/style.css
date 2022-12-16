@@ -1,0 +1,63 @@
+.text-login,
+.text-register {
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  font-weight: 400;
+  color: #808191;
+}
+.text-login-link,
+.text-register-link {
+  color: #8d28ad;
+  font-weight: 500;
+  text-decoration: underline;
+  margin-bottom: 24px; 
+}
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 0;
+}
+.btn-google > span {
+  color: #4b5264;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 26px;
+}
+.link-email {
+  font-size: 12px;
+  line-height: 18px;
+  color: #4b5264;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+.link-forgot-pw {
+  font-size: 12px;
+  line-height: 18px;
+  float: right;
+  margin: 25px 0 0;
+}
+.btn-submit {
+    width: 100%;
+    margin-top: 25px;
+}
+/* Lg */
+@media (min-width: 1024px) {
+  .text-login,
+  .text-register {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 32px;
+  }
+  .link-email {
+    font-size: 14px;
+    line-height: 22px;
+    margin-bottom: 20px;
+  }
+  .btn-submit {
+    margin-top: 20px;
+  }
+}

@@ -43,8 +43,8 @@ const Wrapper = styled.nav`
     padding: 0.5rem;
     border-radius: var(--borderRadius);
     font-weight: 500;
-
   }
+  
   .btn:hover{
     background-color: #761793;
   }
@@ -67,6 +67,7 @@ const Wrapper = styled.nav`
     visibility: visible;
   }
   .dropdown-btn {
+    font-weight: 600;
     background: transparent;
     border-color: transparent;
     letter-spacing: var(--letterSpacing);
