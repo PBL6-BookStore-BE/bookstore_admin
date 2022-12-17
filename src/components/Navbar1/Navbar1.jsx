@@ -5,12 +5,16 @@ import BookLogo from '../common/BookLogo';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '../../store/cases/getAll/slice';
-import { Heading } from '@chakra-ui/react';
+import { Heading, Link } from '@chakra-ui/react';
+import { logout } from '../../store/cases/auth/slice';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [showLogout, setShowLogout] = useState(false);
-//   const { user } = useSelector((store) => store.user)
-  const dispatch = useDispatch()
+  const { user, isLogged } = useSelector((store) => store.auth)
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const toggle = () => {
     dispatch(toggleSidebar());
@@ -30,13 +34,13 @@ const Navbar = () => {
         <div className="btn-container">
           <button className="btn" type="button" onClick={() =>setShowLogout(!showLogout)}>
             <FaUserCircle />
-            {/* {user?.name} */}
-            hkngoc
+            {user}
             <FaCaretDown />
           </button>
-          {/* "dropdown show-dropdown" */}
           <div className={showLogout? 'dropdown show-dropdown' : 'dropdown'}>
-            <button className="dropdown-btn" type='button' onClick={() =>console.log('loggout')}>
+            <button className="dropdown-btn" type='button' onClick={() =>{
+              dispatch(logout())
+              navigate('/landing')}}>
               logout
             </button>
           </div>

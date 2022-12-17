@@ -17,12 +17,15 @@ const Wrapper = styled.main`
   }
   h1 {
     font-weight: 700;
+    margin-bottom: 21px;
     span {
-      color: var(--primary-500);
+      color: var(--primary);
     }
   }
   p {
     color: var(--grey-600);
+    margin-bottom: 28px;
+    text-align: left;
   }
   .main-img {
     display: none;
