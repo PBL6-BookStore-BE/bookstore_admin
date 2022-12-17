@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Select, GridItem, Input, Table, TableContainer, Tbody, Th, Thead, Tr, VStack } from '@chakra-ui/react';
+import { Box, Button, Grid, Select, GridItem, Input, Table, TableContainer, Tbody, Th, Thead, Tr, VStack, Heading } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import FormAddBook from '../../components/FormAddBook/FormAddBook';
@@ -74,6 +74,7 @@ const Book = () => {
   return (
     <div>
         <VStack align='flex-start' spacing={8}>
+            <Heading color='#8D28AD' size='lg'>Book</Heading>
             <Grid 
                 templateColumns="repeat(10, 1fr)" 
                 gap={6} 

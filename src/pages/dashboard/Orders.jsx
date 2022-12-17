@@ -1,5 +1,5 @@
 import { DownloadIcon } from '@chakra-ui/icons';
-import { Box, Button, Grid, Select, GridItem, Input, Table, TableContainer, Tbody, Th, Thead, Tr, VStack } from '@chakra-ui/react';
+import { Box, Button, Grid, Select, GridItem, Input, Table, TableContainer, Tbody, Th, Thead, Tr, VStack, Heading } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
 import SingleOrder from '../../components/SingleOrder/SingleOrder';
 import { CSVLink } from "react-csv";
@@ -98,6 +98,7 @@ const Orders = () => {
   return (
     <div>
         <VStack align='flex-start' spacing={8}>
+            <Heading color='#8D28AD' size='lg'>Orders</Heading>
             <Grid 
                 templateColumns="repeat(10, 1fr)" 
                 gap={6} 
@@ -169,7 +170,7 @@ const Orders = () => {
                             <Th>Amount</Th>
                             <Th>Status</Th>
                             <Th>Actions</Th>
-                            <Th>Invoice</Th>
+                            {/* <Th>Invoice</Th> */}
                         </Tr>
                     </Thead>
                     <Tbody>

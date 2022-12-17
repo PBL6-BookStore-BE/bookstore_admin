@@ -1,8 +1,13 @@
 import { Box, Button, Select, Td, Tooltip, Tr } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { listOrders } from '../../store/cases/getAll/action';
+import { updateStatus } from '../../store/cases/order/slice';
 import { DetailsIcon } from '../icons';
 
 const SingleOrder = ({ order }) => {
+    const dispatch = useDispatch();
     const [status, setStatus] = useState(order.status);
     const statusOptions = [
         { value: true, label: 'Delivered'},
@@ -16,7 +21,7 @@ const SingleOrder = ({ order }) => {
             <Td fontWeight="600">{order.payment}</Td>
             <Td fontWeight="600">${order.total}</Td>
             <Td>
-                {order.status ? (
+                {status ? (
                     <Box
                         display="inline-block"
                         color="#8D28AD"
@@ -44,7 +49,19 @@ const SingleOrder = ({ order }) => {
                 <Select 
                     bgColor='#FAFAFA' size='lg' fontSize='md'
                     value={status}
-                    onChange={(e) => setStatus(e.target.value)}
+                    onChange={(e) => {
+                        setStatus(e.target.value);
+                        try {
+                            dispatch(updateStatus({
+                                id: Number(order.id),
+                                status: (e.target.value === "true"),
+                            }));
+                            dispatch(listOrders());
+                        } catch(err) {
+                            console.log(err);
+                            toast.error("Can't update status");
+                        }
+                    }}
                 >
                     {statusOptions.map((item) => {
                         return (
@@ -53,7 +70,7 @@ const SingleOrder = ({ order }) => {
                     })}
                 </Select>
             </Td>
-            <Td>
+            {/* <Td>
                 <Tooltip label="Details" placement='top'>
                     <Button
                         bgColor='#FAFAFA' 
@@ -64,7 +81,7 @@ const SingleOrder = ({ order }) => {
                         <DetailsIcon /> 
                     </Button>
                  </Tooltip>
-            </Td>
+            </Td> */}
         </Tr>
     )
 };
