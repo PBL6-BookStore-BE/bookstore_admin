@@ -1,8 +1,8 @@
 import React from 'react'
 
-const AreaChart = () => {
+const AreaChart = ({data}) => {
   return (
-    <div>AreaChart</div>
+    <div>{data}</div>
   )
 }
 

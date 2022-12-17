@@ -1,7 +1,6 @@
 import { Box, Heading, Text, VStack } from '@chakra-ui/react';
 import React from 'react'
 import Wrapper from '../../assets/wrappers/StatsContainer';
-import StartItem from '../../assets/wrappers/StatsContainer';
 import ThisMonth from '../icons/cases/ThisMonth';
 import TodayOrder from '../icons/cases/TodayOrder';
 import TotalOrder from '../icons/cases/TotalOrder';
