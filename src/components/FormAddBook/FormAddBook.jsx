@@ -52,8 +52,6 @@ const FormAddBook = (props) => {
             list_img.push(item);
         }
       }); 
-      console.log("list_img: ", list_img);
-      console.log("isUpdateImage", isUpdateImage);
       const updateData = {
         name: book.name,
         price: Number(book.price),
