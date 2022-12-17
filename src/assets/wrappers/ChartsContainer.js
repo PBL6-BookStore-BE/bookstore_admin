@@ -7,9 +7,10 @@ const Wrapper = styled.section`
     background: transparent;
     border-color: transparent;
     text-transform: capitalize;
-    color: var(--primary-500);
+    color: var(--primary);
     font-size: 1.25rem;
     cursor: pointer;
+    font-weight: 600;
   }
   h4 {
     text-align: center;
