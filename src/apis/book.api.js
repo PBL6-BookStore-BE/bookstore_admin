@@ -42,10 +42,13 @@ const updateBook = (data) => {
     data.idAuthors.forEach((item) => {
         formData.append("IdAuthors[]", item)
     });
-    data.list_img.forEach((item) => {
-        console.log(item);
-        formData.append("list_img", item)
-    });
+    if (data.list_img === null) {
+        formData.append("list_img", null);
+    } else {
+        data.list_img.forEach((item) => {
+            formData.append("list_img", item)
+        });
+    }
     return apiClient.put(`/book/${data.id}`, formData, {
         headers: {
             "content-Type": "multipart/form-data",
