@@ -1,5 +1,6 @@
  import { createSlice } from "@reduxjs/toolkit";
 import { forgotPassword, login, register, resetPassword } from "./action";
+import { toast } from "react-toastify";
 
 const initialState = {
   message: "",
@@ -24,6 +25,7 @@ export const authSlice = createSlice({
       state.user = localStorage.getItem("userName");
     },
     logout: (state) => {
+      toast.success('Logout successfully')
       state.isLogged = false;
       state.token='';
       state.user=null;
@@ -72,6 +74,12 @@ export const authSlice = createSlice({
         localStorage.setItem("message", action.payload.data.message);
         localStorage.setItem("user", action.payload.data.userName);
         localStorage.setItem("token", action.payload.data.token);
+      }
+      if(action.payload.data.userName !== "superadmin"){
+        toast.error('You not allowed to login');
+      }
+      else{
+        toast.success('Login successfully');
       }
     },
     [login.rejected]: (state) => {
