@@ -1,4 +1,4 @@
-import { Box, Heading, Text, VStack } from '@chakra-ui/react';
+import { Heading, Text, VStack } from '@chakra-ui/react';
 import React from 'react'
 import Wrapper from '../../assets/wrappers/StatsContainer';
 import ThisMonth from '../icons/cases/ThisMonth';
