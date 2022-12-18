@@ -8,7 +8,7 @@ const initialState = {
   user: localStorage.getItem("user"),
   email: "",
   token: "",
-  roles: [],
+  roles: [localStorage.getItem("roles")],
   loading: false,
   error: "",
   isLogged: !!localStorage.getItem("token"),
@@ -35,6 +35,7 @@ export const authSlice = createSlice({
       localStorage.removeItem('user');
       localStorage.removeItem('token');
       localStorage.removeItem('message');
+      localStorage.removeItem('roles');
       localStorage.clear();
     },
   },
@@ -63,6 +64,7 @@ export const authSlice = createSlice({
       state.loading = false;
       if (!action.payload.data.isSuccess) {
         state.error = action.payload.data.message;
+        toast.error(action.payload.data.message);
       } else {
         state.error = "";
         state.message = action.payload.data.message;
@@ -74,8 +76,9 @@ export const authSlice = createSlice({
         localStorage.setItem("message", action.payload.data.message);
         localStorage.setItem("user", action.payload.data.userName);
         localStorage.setItem("token", action.payload.data.token);
+        localStorage.setItem("roles", action.payload.data.roles);
       }
-      if(action.payload.data.userName !== "superadmin"){
+      if(action.payload.data.roles[0] !== "Administrator"){
         toast.error('You not allowed to login');
       }
       else{
