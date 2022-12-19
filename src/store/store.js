@@ -5,7 +5,6 @@ import categoryReducer from "./cases/category/slice";
 import authorReducer from "./cases/author/slice";
 import publisherReducer from "./cases/publisher/slice";
 import bookReducer from "./cases/book/slice";
-import orderRducer from "./cases/order/slice";
 
 const combinedReducer = combineReducers({
   auth: authReducer,
@@ -13,8 +12,7 @@ const combinedReducer = combineReducers({
   category: categoryReducer,
   author: authorReducer,
   publisher: publisherReducer,
-  book: bookReducer,
-  order: orderRducer,
+  book: bookReducer
 });
 
 const rootReducer = (state, action) => {

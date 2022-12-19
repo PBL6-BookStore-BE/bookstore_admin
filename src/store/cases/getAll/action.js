@@ -2,7 +2,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getAuthors } from "../../../apis/author.api";
 import { getListBook } from "../../../apis/book.api";
 import { getCategories } from "../../../apis/category.api";
-import { getOrders } from "../../../apis/order.api";
 import { getPublishers } from "../../../apis/publisher.api";
 import apiClient from "../../../utils/apiClient";
 
@@ -11,7 +10,6 @@ const listCategories = createAsyncThunk("categories", async () => getCategories(
 const listAuthors = createAsyncThunk("authors", async () => getAuthors());
 const listPublishers = createAsyncThunk("publishers", async () => getPublishers());
 const listBooks = createAsyncThunk("books", async () => getListBook());
-const listOrders = createAsyncThunk("orders", async () => getOrders());
 
 export const getCategoryBySearchThunk = async(_, thunkAPI) => {
     const { categories } = thunkAPI.getState().getAll;
@@ -61,4 +59,4 @@ export const getAuthorBySearchThunk = async(_, thunkAPI) => {
         return thunkAPI.rejectWithValue('There was an error');
     }
 };
-export { listCategories, listAuthors, listPublishers, listBooks, listOrders };
+export { listCategories, listAuthors, listPublishers, listBooks };
