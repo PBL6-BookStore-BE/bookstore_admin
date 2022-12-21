@@ -1,17 +1,21 @@
+import { Heading, Text } from '@chakra-ui/react';
 import React, { useState } from 'react'
-import AreaChart from '../AreaChart/AreaChart'
+import { useSelector } from 'react-redux';
 import Wrapper from '../../assets/wrappers/ChartsContainer';
+import AreaChartComponent1 from '../AreaChart/AreaChartComponent1';
+import BarChartComponent from '../BarChartComponent/BarChartComponent';
+import Loading from '../Loading/Loading';
 
-const ChartsContainer = () => {
-  const [month, setMonth] = useState(true);
-
+const ChartsContainer = ({title, data}) => {
+  const [barChart, setBarChart] = useState(true);
   return (
     <Wrapper>
-      <h4>Thong ke luong Sach ban ra</h4>
-      <button type='button' onClick={() => setMonth(!month)}>
-        {month ? 'Weekly' : 'Monthly'}
+      <Heading mb={8} textAlign='center' size='lg' fontWeight='600'>Bieu do mo ta doanh thu cua cua hang theo {title}</Heading>
+      <button type='button' onClick={() => setBarChart(!barChart)}>
+        {barChart ? 'Area Chart' : 'Bar Chart'}
       </button>
-      {month ? <AreaChart data='Monthly' /> : <AreaChart data='Weekly' />}
+      {barChart ? <BarChartComponent data={data} /> : <AreaChartComponent1 data={data} />}
+      
     </Wrapper>
   )
 }
