@@ -1,6 +1,7 @@
 import { Box, Button, Select, Td, Tooltip, Tr } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { listOrders } from '../../store/cases/getAll/action';
 import { updateStatus } from '../../store/cases/order/slice';
@@ -8,14 +9,21 @@ import { DetailsIcon } from '../icons';
 
 const SingleOrder = ({ order }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [status, setStatus] = useState(order.status);
     const statusOptions = [
         { value: true, label: 'Delivered'},
         { value: false, label: 'Pending'},
     ]
+
+    const handleOpenInvoice = () => {
+        navigate(`/order/${order.id}`);
+    }
+
     return ( 
         <Tr>
             <Td>{order.id}</Td>
+            <Td>{order.createdDate.split('T')[0]}</Td>
             <Td>{order.orderAddress}</Td>
             <Td>{order.number}</Td>
             <Td fontWeight="600">{order.payment}</Td>
@@ -70,18 +78,19 @@ const SingleOrder = ({ order }) => {
                     })}
                 </Select>
             </Td>
-            {/* <Td>
+            <Td>
                 <Tooltip label="Details" placement='top'>
                     <Button
                         bgColor='#FAFAFA' 
                         _hover={{ 
                             color: '#8D28AD' 
                         }}
+                        onClick={handleOpenInvoice}
                     >
                         <DetailsIcon /> 
                     </Button>
                  </Tooltip>
-            </Td> */}
+            </Td>
         </Tr>
     )
 };

@@ -12,6 +12,7 @@ import Login from './pages/auth/Login'
 import Logout from './pages/auth/Logout'
 import Error from './pages/Error';
 import ProtectedRoute from './pages/ProtectedRoute';
+import Invoice from './pages/Invoice/Invoice';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="book" element={<Book />} />
           <Route path='book/:id' element={<BookDetails />} />
           <Route path="order" element={<Orders />} />
+          <Route path="order/:id" element={<Invoice />} />
         </Route>
         <Route path='landing' element={<Landing />} />
         <Route path='login' element={<Login />} />
