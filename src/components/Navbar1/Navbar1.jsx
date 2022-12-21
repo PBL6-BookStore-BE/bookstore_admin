@@ -1,17 +1,16 @@
 import React from 'react'
 import Wrapper from '../../assets/wrappers/Navbar';
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
-import BookLogo from '../common/BookLogo';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '../../store/cases/getAll/slice';
-import { Heading, Link } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 import { logout } from '../../store/cases/auth/slice';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [showLogout, setShowLogout] = useState(false);
-  const { user, isLogged } = useSelector((store) => store.auth)
+  const { user } = useSelector((store) => store.auth)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,7 +27,6 @@ const Navbar = () => {
           <FaAlignLeft />
         </button>
         <div>
-          {/* <BookLogo /> */}
           <Heading color='#8D28AD'>Dashboard</Heading>
         </div>
         <div className="btn-container">

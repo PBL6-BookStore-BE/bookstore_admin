@@ -1,5 +1,5 @@
 import React from 'react'
-import {  Box, Heading, Highlight, Text, HStack, VStack, Button } from "@chakra-ui/react";
+import {  Box, Heading, Highlight, Text, HStack, Button } from "@chakra-ui/react";
 import { DeleteIcon } from '@chakra-ui/icons'
 import './style.css'
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +11,7 @@ import { deleteBook, toggleModalDelBook } from '../../store/cases/book/slice';
 const ModalDelete = () => {
   const dispatch = useDispatch()
   const { isModalDelOpen, nameCate, editCateId } = useSelector((store) => store.category)
-  const { isModalDelAuthorOpen, nameAuthor, description, editAuthorId } = useSelector((store) => store.author)
+  const { isModalDelAuthorOpen, nameAuthor, editAuthorId } = useSelector((store) => store.author)
   const { isModalDelPublisherOpen, namePublisher, editPublisherId } = useSelector((store) => store.publisher)
   const { isModalDelBookOpen, nameBook, bookId } = useSelector((store) => store.book);
 
