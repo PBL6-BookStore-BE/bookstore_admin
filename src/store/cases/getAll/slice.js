@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { listAuthors, listBooks, listCategories, listPublishers, getCategoryBySearchThunk, getPublisherBySearchThunk, getAuthorBySearchThunk } from "./action";
+import { listAuthors, listBooks, listOrders, listCategories, listPublishers, getCategoryBySearchThunk, getPublisherBySearchThunk, getAuthorBySearchThunk } from "./action";
 
 const initialFiltersState = {
     search: '',
@@ -28,6 +28,10 @@ const initialState = {
     searchInSelect: '',
   },
   books: {
+    isFetching: false,
+    data: [],
+  },
+  listOrder: {
     isFetching: false,
     data: [],
   },
@@ -155,6 +159,16 @@ export const getAllSlice = createSlice({
       })
       .addCase(listBooks.rejected, (state) => {
         state.books.isFetching = false;
+      })
+      .addCase(listOrders.pending, (state) => {
+        state.listOrder.isFetching = true;
+      })
+      .addCase(listOrders.fulfilled, (state, action) => {
+        state.listOrder.isFetching = false;
+        state.listOrder.data = action.payload;
+      })
+      .addCase(listOrders.rejected, (state) => {
+        state.listOrder.isFetching = false;
       })
   },
 });

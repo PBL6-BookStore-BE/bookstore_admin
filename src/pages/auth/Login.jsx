@@ -7,7 +7,6 @@ import LoginForm from "../../modules/auth/LoginForm";
 import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
 import { Button, useDisclosure } from "@chakra-ui/react";
-import { GoogleIcon } from "../../components/icons";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { login } from "../../store/cases/auth/action";
