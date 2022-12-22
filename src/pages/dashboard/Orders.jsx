@@ -164,13 +164,14 @@ const Orders = () => {
                     <Thead>
                         <Tr>
                             <Th>SR NO</Th>
+                            <Th>Time</Th>
                             <Th>Shipping Address</Th>
                             <Th>Phone</Th>
                             <Th>Method</Th>
                             <Th>Amount</Th>
                             <Th>Status</Th>
                             <Th>Actions</Th>
-                            {/* <Th>Invoice</Th> */}
+                            <Th>Invoice</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
@@ -180,7 +181,6 @@ const Orders = () => {
                     </Tbody>
                 </Table>
             </TableContainer>
-
         </VStack>
     </div>
   )

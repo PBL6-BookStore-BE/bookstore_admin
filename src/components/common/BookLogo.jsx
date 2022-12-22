@@ -1,8 +1,8 @@
-export default function BookLogo() {
+export default function BookLogo(props) {
   return (
     <svg
-      width="177"
-      height="45"
+      width={props.width ? props.width : '177'}
+      height={props.height ? props.height : '45'}
       viewBox="0 0 177 45"
       fill="none"
     >
