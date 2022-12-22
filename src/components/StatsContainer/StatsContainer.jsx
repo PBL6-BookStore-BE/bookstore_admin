@@ -34,11 +34,11 @@ const StatsContainer = () => {
       loadStats();
     }, [loadStats]);
 
-    if(isTotalPaypal || isTotalOrders || isTotalPending){
-      return (
-        <Loading />
-      )
-    }
+    // if(isTotalPaypal || isTotalOrders || isTotalPending){
+    //   return (
+    //     <Loading />
+    //   )
+    // }
   return (
     // 
     <Wrapper>

@@ -33,6 +33,7 @@ function App() {
           <Route path="book" element={<Book />} />
           <Route path='book/:id' element={<BookDetails />} />
           <Route path="order" element={<Orders />} />
+          <Route path="order/:id" element={<Invoice />} />
           <Route path="customer" element={<Customer />} />
         </Route>
         <Route path='landing' element={<Landing />} />
