@@ -4,7 +4,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
-import { Author, Book, Category, Orders, Publisher, Stats, SharedLayout } from './pages/dashboard'
+import { Author, Book, Category, Orders, Publisher, Stats, SharedLayout, Customer } from './pages/dashboard'
 import BookDetails from './pages/BookDetails/BookDetails';
 import Landing from './pages/Landing';
 import Register from './pages/auth/Register'
@@ -20,6 +20,7 @@ function App() {
         <Route 
           path="/" 
           element={
+            // <SharedLayout />
             <ProtectedRoute>
               <SharedLayout />
             </ProtectedRoute>
@@ -31,6 +32,7 @@ function App() {
           <Route path="book" element={<Book />} />
           <Route path='book/:id' element={<BookDetails />} />
           <Route path="order" element={<Orders />} />
+          <Route path="customer" element={<Customer />} />
         </Route>
         <Route path='landing' element={<Landing />} />
         <Route path='login' element={<Login />} />
