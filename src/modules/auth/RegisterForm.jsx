@@ -8,7 +8,7 @@ function RegisterForm() {
   const { errors } = useFormState({ control });
 
   return (
-    <Box>
+    <Box px={4} pt={2} pb={6}>
       <FormControl mt={4} isInvalid={!!errors.fullName}>
         <FormLabel mb={2}>Full Name *</FormLabel>
         <Input
@@ -51,29 +51,18 @@ function RegisterForm() {
           placeholder="Da Nang"
           onChange={() => clearErrors("address")}
         />
-        {errors.phoneNumber && <ErrorMessage error={errors.phoneNumber.message} />}
+        {errors.address && <ErrorMessage error={errors.address.message} />}
       </FormControl>
-      <FormControl mt={4} isInvalid={!!errors.phoneNumber}>
+      <FormControl mt={4} isInvalid={!!errors.phone}>
         <FormLabel mb={2}>Phone Number *</FormLabel>
         <Input
-          {...register("phoneNumber")}
-          name="phoneNumber"
+          {...register("phone")}
+          name="phone"
           type="text"
           placeholder="0379478263"
-          onChange={() => clearErrors("phoneNumber")}
+          onChange={() => clearErrors("phone")}
         />
-        {errors.phoneNumber && <ErrorMessage error={errors.phoneNumber.message} />}
-      </FormControl>
-      <FormControl mt={4} isInvalid={!!errors.password}>
-        <FormLabel mb={2}>Password *</FormLabel>
-        <Input
-          name="password"
-          type="password"
-          placeholder="Create a password"
-          {...register("password")}
-          onChange={() => clearErrors("password")}
-        />
-        {errors.password && <ErrorMessage error={errors.password.message} />}
+        {errors.phone && <ErrorMessage error={errors.phone.message} />}
       </FormControl>
     </Box>
   );

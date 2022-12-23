@@ -36,6 +36,16 @@ const Navbar = () => {
             <FaCaretDown />
           </button>
           <div className={showLogout? 'dropdown show-dropdown' : 'dropdown'}>
+            <button className="dropdown-btn" type='button' 
+                onClick={() =>{
+                  console.log('setting');
+                  // dispatch(logout())
+                  // navigate('/landing')
+                }}>
+                My Account
+              </button>
+          </div>
+          <div className={showLogout? 'dropdown1 show-dropdown' : 'dropdown1'}>
             <button className="dropdown-btn" type='button' onClick={() =>{
               dispatch(logout())
               navigate('/landing')}}>

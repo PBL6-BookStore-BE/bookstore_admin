@@ -6,7 +6,8 @@ import Book from "./Book";
 import Orders from "./Orders";
 import SharedLayout from "./SharedLayout";
 import Customer from "./Customer";
+import OurStaff from "./OurStaff";
 
 export {
-    Author, Category, Publisher, Stats, Book, Orders, SharedLayout, Customer
+    Author, Category, Publisher, Stats, Book, Orders, SharedLayout, Customer, OurStaff
 }

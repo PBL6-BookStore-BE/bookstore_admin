@@ -63,6 +63,20 @@ const Wrapper = styled.nav`
     color: var(--primary);
     font-weight: 500;
   }
+  .dropdown1 {
+    position: absolute;
+    top: 110px;
+    left: 0;
+    width: 100%;
+    background: #dbb4e8;
+    box-shadow: var(--shadow-2);
+    padding: 0.5rem;
+    text-align: center;
+    visibility: hidden;
+    border-radius: var(--borderRadius);
+    color: var(--primary);
+    font-weight: 500;
+  }
   .show-dropdown {
     visibility: visible;
   }
@@ -75,6 +89,9 @@ const Wrapper = styled.nav`
     cursor: pointer;
   }
   .dropdown:hover {
+    opacity: 0.8;
+  }
+  .dropdown1:hover {
     opacity: 0.8;
   }
   .logo-text {

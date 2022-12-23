@@ -8,7 +8,7 @@ const initialState = {
   user: localStorage.getItem("user"),
   email: "",
   token: "",
-  roles: [localStorage.getItem("roles")],
+  roles: localStorage.getItem("roles"),
   loading: false,
   error: "",
   isLogged: !!localStorage.getItem("token"),
@@ -78,11 +78,11 @@ export const authSlice = createSlice({
         localStorage.setItem("token", action.payload.data.token);
         localStorage.setItem("roles", action.payload.data.roles);
       }
-      if(action.payload.data.roles[0] !== "Administrator"){
-        toast.error('You not allowed to login');
+      if(action.payload.data.roles.includes("Administrator")){
+        toast.success('Login successfully');
       }
       else{
-        toast.success('Login successfully');
+        toast.error('You not allowed to login');
       }
     },
     [login.rejected]: (state) => {

@@ -4,7 +4,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
-import { Author, Book, Category, Orders, Publisher, Stats, SharedLayout, Customer } from './pages/dashboard'
+import { Author, Book, Category, Orders, Publisher, Stats, SharedLayout, Customer, OurStaff } from './pages/dashboard'
 import BookDetails from './pages/BookDetails/BookDetails';
 import Landing from './pages/Landing';
 import Register from './pages/auth/Register'
@@ -35,6 +35,7 @@ function App() {
           <Route path="order" element={<Orders />} />
           <Route path="order/:id" element={<Invoice />} />
           <Route path="customer" element={<Customer />} />
+          <Route path="staff" element={<OurStaff />} />
         </Route>
         <Route path='landing' element={<Landing />} />
         <Route path='login' element={<Login />} />
