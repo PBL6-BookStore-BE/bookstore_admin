@@ -6,7 +6,7 @@ const initialState = {
   message: "",
   // user: '',
   user: localStorage.getItem("user"),
-  email: "",
+  email: localStorage.getItem("email"),
   token: "",
   roles: localStorage.getItem("roles"),
   loading: false,
@@ -77,6 +77,7 @@ export const authSlice = createSlice({
         localStorage.setItem("user", action.payload.data.userName);
         localStorage.setItem("token", action.payload.data.token);
         localStorage.setItem("roles", action.payload.data.roles);
+        localStorage.setItem("email", action.payload.data.email);
       }
       if(action.payload.data.roles.includes("Administrator")){
         toast.success('Login successfully');

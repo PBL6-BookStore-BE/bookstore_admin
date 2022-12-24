@@ -2,6 +2,7 @@ import { Box, Select, Td, Tr } from '@chakra-ui/react';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { toast } from "react-toastify";
+import { updateState } from '../../store/cases/customer/slice';
 
 const SingleStaff = ({ id, isActive, username, fullName, email, phoneNumber, address }) => {
     const dispatch = useDispatch();
@@ -49,11 +50,10 @@ const SingleStaff = ({ id, isActive, username, fullName, email, phoneNumber, add
                 onChange={(e) => {
                     setIsDelete(e.target.value);
                     try {
-                        // dispatch(updateState({
-                        //     id: id, 
-                        //     state: !isDelete,
-                        // }));
-                        // dispatch(getCustomerBySearch());
+                        dispatch(updateState({
+                            id: id, 
+                            state: !isDelete,
+                        }));
                         console.log(!isDelete);
                     } catch(err) {
                         console.log(err);

@@ -56,19 +56,19 @@ const Stats = () => {
             <Styles>
               <DatePickerRange />
             </Styles>
-            {dataDaily.length>0 && <ChartsContainer title='Ngay' data={dataDaily} />}
+            {dataDaily.length>0 && <ChartsContainer title='Ngày' data={dataDaily} />}
           </TabPanel>
           <TabPanel>
             <Styles>
               <MonthPickerRange />
             </Styles>
-            {dataMonthly.length>0 && <ChartsContainer title='Thang' data={dataMonthly} />}
+            {dataMonthly.length>0 && <ChartsContainer title='Tháng' data={dataMonthly} />}
           </TabPanel>
           <TabPanel>
             <Styles>
               <YearPickerRange />
             </Styles>
-            {dataYearly.length>0 && <ChartsContainer title='Nam' data={dataYearly} />}
+            {dataYearly.length>0 && <ChartsContainer title='Năm' data={dataYearly} />}
           </TabPanel>
         </TabPanels>
       </Tabs>

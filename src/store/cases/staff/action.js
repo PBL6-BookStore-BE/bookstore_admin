@@ -1,7 +1,8 @@
 import apiClient from "../../../utils/apiClient";
-import { clearValues, getStaffBySearch } from "./slice";
-import { createStaff } from "../../../apis/staff.api";
+import { getStaffBySearch } from "./slice";
+import { createStaff, updateStaff } from "../../../apis/staff.api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { getInforUser } from "../user/action";
 
 export const getStaffBySearchThunk = async (_, thunkAPI) => {
     const { search } = thunkAPI.getState().staff;
@@ -14,7 +15,6 @@ export const getStaffBySearchThunk = async (_, thunkAPI) => {
     }
     try {
         const response = await apiClient.get(url);
-        console.log(response.data);
         return response.data
     } catch (error) {
         return thunkAPI.rejectWithValue('There was an error');
@@ -22,7 +22,14 @@ export const getStaffBySearchThunk = async (_, thunkAPI) => {
 };
 
 export const createAdmin = createAsyncThunk("register/dashboard", async (data, thunkAPI) => {
-  const response = await createStaff(data);
-  thunkAPI.dispatch(getStaffBySearch());
-  return response.data;
+    const response = await createStaff(data);
+    thunkAPI.dispatch(getStaffBySearch());
+    return response.data;
+});
+
+export const editProfileStaff = createAsyncThunk("staff/edit", async (data, thunkAPI) => {
+    const { email } = thunkAPI.getState().auth;
+    const response = await updateStaff(data);
+    thunkAPI.dispatch(getInforUser(email));
+    return response.data;
 });

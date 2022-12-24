@@ -9,6 +9,7 @@ import orderRducer from "./cases/order/slice";
 import statReducer from "./cases/stat/slice";
 import { customerReducer } from "./cases/customer/slice";
 import { staffReducer } from "./cases/staff/slice";
+import { userReducer } from "./cases/user/slice";
 
 const combinedReducer = combineReducers({
   auth: authReducer,
@@ -21,6 +22,7 @@ const combinedReducer = combineReducers({
   stat: statReducer,
   customer: customerReducer,
   staff: staffReducer,
+  user: userReducer,
 });
 
 const rootReducer = (state, action) => {

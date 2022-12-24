@@ -27,6 +27,7 @@ html {
   --grey-800: #243b53;
   --grey-900: #102a43;
   /* rest of the vars */
+  --red-dark: #842029;
   --backgroundColor: var(--white-50);
   --textColor: var(--grey-900);
   --borderRadius: 0.25rem;

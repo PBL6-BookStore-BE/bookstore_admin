@@ -7,12 +7,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Author, Book, Category, Orders, Publisher, Stats, SharedLayout, Customer, OurStaff } from './pages/dashboard'
 import BookDetails from './pages/BookDetails/BookDetails';
 import Landing from './pages/Landing';
-import Register from './pages/auth/Register'
 import Login from './pages/auth/Login'
 import Logout from './pages/auth/Logout'
 import Error from './pages/Error';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Invoice from './pages/Invoice/Invoice';
+import EditProfile from './pages/EditProfile';
 
 function App() {
   return (
@@ -21,7 +21,6 @@ function App() {
         <Route 
           path="/" 
           element={
-            // <SharedLayout />
             <ProtectedRoute>
               <SharedLayout />
             </ProtectedRoute>
@@ -36,11 +35,13 @@ function App() {
           <Route path="order/:id" element={<Invoice />} />
           <Route path="customer" element={<Customer />} />
           <Route path="staff" element={<OurStaff />} />
+          <Route path="profile" element={<EditProfile />} />
         </Route>
         <Route path='landing' element={<Landing />} />
         <Route path='login' element={<Login />} />
         <Route path='logout' element={<Logout />} />
         <Route path='*' element={<Error />} />
+        
       </Routes>
       <ToastContainer
         position={toast.POSITION.TOP_RIGHT}

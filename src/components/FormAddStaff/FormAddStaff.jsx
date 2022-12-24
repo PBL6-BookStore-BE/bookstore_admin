@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Heading, Input, VStack, Text, HStack, Button, useDisclosure } from "@chakra-ui/react";
+import { Box, Heading, VStack, Text, HStack, Button, useDisclosure } from "@chakra-ui/react";
 import { CloseIcon } from '@chakra-ui/icons'
 import './style.css'
 import { toast } from "react-toastify";
-import { clearValues, handleChange, toggleModalAdd } from '../../store/cases/staff/slice';
-import { FormProvider, useForm, useFormContext } from 'react-hook-form';
+import { clearValues, toggleModalAdd } from '../../store/cases/staff/slice';
+import { FormProvider, useForm } from 'react-hook-form';
 import RegisterForm from '../../modules/auth/RegisterForm';
 import { schema } from '../../pages/auth/schema/schema';
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,27 +15,11 @@ function FormAddStaff(){
   const dispatch = useDispatch();
   const { isModalAddOpen } = useSelector((store) => store.staff);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if(!fullName || !username || !email || !phone || !address){
-  //     toast.error("Please fill out all fields");
-  //     return;
-  //   }
-  //   dispatch(createStaff({fullName: fullName, username: username, email: email, phone: phone, address: address }))
-  // }
-
-  // const handleStaffInput = (e) => {
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-  //   dispatch(handleChange({ name, value }));
-  // };
-
   const {
     isOpen: isLoading,
     onClose: closeLoading,
     onOpen: openLoading,
   } = useDisclosure();
-  const { reset } = useForm();
   const methods = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -47,11 +31,9 @@ function FormAddStaff(){
     },
     mode: "onSubmit",
   });
-  const defaultValue = {...methods};
   const onSubmit = useCallback(
     async (data, e) => {
       try {
-        console.log(defaultValue);
         openLoading();
         const res = await dispatch(createAdmin(data));
         const { payload } = res;

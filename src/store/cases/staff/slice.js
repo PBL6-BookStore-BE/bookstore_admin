@@ -1,22 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { createAdmin, createStaffThunk, getStaffBySearchThunk } from "./action";
+import { createAdmin, getStaffBySearchThunk, editProfileStaff } from "./action";
 
 const initialState = {
     search: '',
     staffs: [],
     isLoading: false,
+    isLoading1: false,
     isFetching: false,
     isModalAddOpen: false,
-    fullName: "",
-    username: "",
-    email: "",
-    phone: "",
-    address: ""
+    isModalEditOpen: false,
 };
 
 export const getStaffBySearch = createAsyncThunk('search/staff', getStaffBySearchThunk);
-// export const createStaff = createAsyncThunk('staff/createStaff', createStaffThunk);
 
 export const staffSlice = createSlice({
     name: "staff",
@@ -53,10 +49,20 @@ export const staffSlice = createSlice({
             })
             .addCase(createAdmin.fulfilled, (state, action) => {
                 state.isLoading = false;
-                // state.isModalAddOpen = !state.isModalAddOpen;
             })
             .addCase(createAdmin.rejected, (state) => {
                 state.isLoading = false;
+                toast.error('Error');
+            })
+            .addCase(editProfileStaff.pending, (state) => {
+                state.isLoading1 = true;
+            })
+            .addCase(editProfileStaff.fulfilled, (state, action) => {
+                state.isLoading1 = false;
+                toast.success(action.payload.message)
+            })
+            .addCase(editProfileStaff.rejected, (state) => {
+                state.isLoading1 = false;
                 toast.error('Error');
             })
     },
