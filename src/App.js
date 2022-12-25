@@ -9,6 +9,8 @@ import BookDetails from './pages/BookDetails/BookDetails';
 import Landing from './pages/Landing';
 import Login from './pages/auth/Login'
 import Logout from './pages/auth/Logout'
+import ForgotPassword from './pages/auth/ForgotPassword'
+import ResetPassword from './pages/auth/ResetPassword'
 import Error from './pages/Error';
 import ProtectedRoute from './pages/ProtectedRoute';
 import Invoice from './pages/Invoice/Invoice';
@@ -40,6 +42,8 @@ function App() {
         <Route path='landing' element={<Landing />} />
         <Route path='login' element={<Login />} />
         <Route path='logout' element={<Logout />} />
+        <Route path="forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path='*' element={<Error />} />
         
       </Routes>
