@@ -1,6 +1,6 @@
 import { HStack } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/react";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 // import './style.css'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,7 +11,6 @@ import { toast } from "react-toastify";
 export function YearPickerRange() {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((store) => store.stat);
-    const newDay = new Date();
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
 

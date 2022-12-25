@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getDailyPaypalIncome, getDailySales, getDailyTotalOrders, getMonthlySales, getPendingOrders, getYearlySales } from "../../../apis/stat.api";
-import apiClient from "../../../utils/apiClient";
 
 export const getYearlySalesThunk = async (data, thunkAPI) => {
     try {

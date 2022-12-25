@@ -23,15 +23,15 @@ const StatsContainer = () => {
   }, [dispatch])
   const loadStats = useCallback(async () => {
     try {
-        dispatch(PendingOrders());
-        } catch (error) {
-        console.log(error);
-        }
-    }, [dispatch]);
+      dispatch(PendingOrders());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
 
-    useEffect(() => {
-      loadStats();
-    }, [loadStats]);
+  useEffect(() => {
+    loadStats();
+  }, [loadStats]);
 
   return (
     // 

@@ -10,7 +10,7 @@ const LayoutAuthentication = (props) => {
   return (
     <div className="auth-layout">
       <img
-        src="./static-data/Ellipse.png"
+        src="./Ellipse.png"
         alt="ellipse"
         className="ellipse-bg"
       />

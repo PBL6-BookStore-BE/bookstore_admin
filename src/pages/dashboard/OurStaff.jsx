@@ -7,7 +7,7 @@ import { handleChange, toggleModalAdd } from '../../store/cases/staff/slice'
 
 const OurStaff = () => {
   const dispatch = useDispatch();
-  const { isLoading, staffs, search } = useSelector((state) => state.staff);
+  const { search } = useSelector((state) => state.staff);
 
   const handleSearch = (e) => {
     dispatch(handleChange({ name: e.target.name, value: e.target.value }));
