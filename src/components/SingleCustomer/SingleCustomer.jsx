@@ -1,9 +1,8 @@
 import { Box, Select, Td, Tr } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { getCustomerBySearch, updateState } from '../../store/cases/customer/slice';
+import { updateState } from '../../store/cases/customer/slice';
 
 const SingleCustomer = ({ id, isActive, creatdOn, fullName, email, phoneNumber, address }) => {
     const dispatch = useDispatch();
@@ -55,8 +54,6 @@ const SingleCustomer = ({ id, isActive, creatdOn, fullName, email, phoneNumber, 
                             id: id, 
                             state: !isDelete,
                         }));
-                        // dispatch(getCustomerBySearch());
-                        console.log(!isDelete);
                     } catch(err) {
                         console.log(err);
                         toast.error("Can't update status");

@@ -1,6 +1,4 @@
 import React from 'react'
-import { DatePickerRange } from '../DatePickerRange/DatePickerRange'
-import styled from "styled-components";
 import {
   ResponsiveContainer,
   AreaChart,
@@ -10,7 +8,6 @@ import {
   CartesianGrid,
   Tooltip,
 } from 'recharts';
-import Loading from '../Loading/Loading';
 
 const AreaChartComponent1 = ({data}) => {
 

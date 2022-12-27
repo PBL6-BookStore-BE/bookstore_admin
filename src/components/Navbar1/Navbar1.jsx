@@ -1,15 +1,21 @@
 import React from 'react'
 import Wrapper from '../../assets/wrappers/Navbar';
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '../../store/cases/getAll/slice';
-import { Heading } from '@chakra-ui/react';
+import { Button, Heading } from '@chakra-ui/react';
 import { logout } from '../../store/cases/auth/slice';
 import { useNavigate } from 'react-router-dom';
+import { AiOutlineSetting } from 'react-icons/ai'
+import { MdLogout } from 'react-icons/md'
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+} from '@chakra-ui/react'
 
 const Navbar = () => {
-  const [showLogout, setShowLogout] = useState(false);
   const { user } = useSelector((store) => store.auth)
 
   const dispatch = useDispatch();
@@ -20,7 +26,6 @@ const Navbar = () => {
   }
 
   return (
-    // <Wrapper style={{ zIndex: "10" }}>
     <Wrapper>
       <div className="nav-center">
         <button type='button' className="toggle-btn" onClick={toggle}>
@@ -29,20 +34,49 @@ const Navbar = () => {
         <div>
           <Heading color='#8D28AD'>Dashboard</Heading>
         </div>
-        <div className="btn-container">
-          <button className="btn" type="button" onClick={() =>setShowLogout(!showLogout)}>
-            <FaUserCircle />
+        <Menu>
+          <MenuButton 
+            as={Button} 
+            leftIcon={<FaUserCircle />} color='#fff'
+            rightIcon={<FaCaretDown />} bg='#8D28AD'
+            _hover={{
+              backgroundColor: '#761793'
+            }}
+            _active={{
+              backgroundColor: '#761793'
+            }}
+          >
             {user}
-            <FaCaretDown />
-          </button>
-          <div className={showLogout? 'dropdown show-dropdown' : 'dropdown'}>
-            <button className="dropdown-btn" type='button' onClick={() =>{
+          </MenuButton>
+          <MenuList bg='#dbb4e8'>
+            <MenuItem 
+              bg='#dbb4e8'
+              _hover={{
+                color: '#761793',
+                fontWeight: 700
+                }}
+              icon={<AiOutlineSetting />}
+              onClick={() =>{
+                navigate('/profile')
+              }}
+            >
+              Edit Profile
+            </MenuItem>
+            <MenuItem
+              bg='#dbb4e8'
+              _hover={{
+                color: '#761793',
+                fontWeight: 700
+                }}
+              icon={<MdLogout />}
+              onClick={() =>{
               dispatch(logout())
-              navigate('/landing')}}>
-              logout
-            </button>
-          </div>
-        </div>
+              navigate('/landing')}}
+            >
+              Log out
+            </MenuItem>
+          </MenuList>
+        </Menu>
       </div>
     </Wrapper>
   )

@@ -1,4 +1,4 @@
-import { Grid, GridItem, Heading, Input, VStack } from '@chakra-ui/react'
+import {  Heading, Input, VStack } from '@chakra-ui/react'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import CustomerContainer from '../../components/CustomerContainer/CustomerContainer'
@@ -6,7 +6,7 @@ import { handleChange } from '../../store/cases/customer/slice';
 
 const Customer = () => {
   const dispatch = useDispatch();
-  const { isLoading, customers, search } = useSelector((state) => state.customer);
+  const { search } = useSelector((state) => state.customer);
 
   const handleSearch = (e) => {
     dispatch(handleChange({ name: e.target.name, value: e.target.value }));
