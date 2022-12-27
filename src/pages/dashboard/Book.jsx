@@ -145,9 +145,9 @@ const Book = () => {
                       price: book.price,
                       pages: book.pages,
                       publicationDate: book.publicationDate.split('T')[0],
-                      idCategory: getId(book.categoryName, categories),
-                      idPublisher: getId(book.publisherName, publishers),
-                      idAuthors: getIdAuthors(book.authors, authors),
+                      idCategory: getId(book.categoryName, categories.dataInSelect),
+                      idPublisher: getId(book.publisherName, publishers.dataInSelect),
+                      idAuthors: getIdAuthors(book.authors, authors.dataInSelect),
                       list_img: book.urls,
                       description: book.description
                     }}))
