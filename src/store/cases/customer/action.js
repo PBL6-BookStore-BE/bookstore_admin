@@ -1,4 +1,3 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
 import { updateState } from "../../../apis/customer.api";
 import apiClient from "../../../utils/apiClient";
 
@@ -13,7 +12,6 @@ export const getCustomerBySearchThunk = async (_, thunkAPI) => {
     }
     try {
         const response = await apiClient.get(url);
-        console.log(response.data);
         return response.data
     } catch (error) {
         return thunkAPI.rejectWithValue('There was an error');
@@ -23,7 +21,6 @@ export const getCustomerBySearchThunk = async (_, thunkAPI) => {
 export const updateStateThunk = async (data, thunkAPI) => {
     try {
         const response = await updateState(data);
-        console.log(response.data);
         return response.data;
     } catch (error) {
         console.log(error)

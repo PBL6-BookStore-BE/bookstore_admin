@@ -7,14 +7,14 @@ import { getDailyPaypalIncome, getDailyTotalOrders } from '../../store/cases/sta
 import ThisMonth from '../icons/cases/ThisMonth';
 import TodayOrder from '../icons/cases/TodayOrder';
 import TotalOrder from '../icons/cases/TotalOrder';
-import Loading from '../Loading/Loading';
 
 const StatsContainer = () => {
   const dispatch = useDispatch();
-  const { isTotalPaypal, isTotalOrders, isTotalPending, totalOrders, totalPending, totalPaypal } = useSelector((store) => store.stat);
+  const { totalOrders, totalPending, totalPaypal } = useSelector((store) => store.stat);
   
   useMemo(async () => {
     const dateNow = new Date().toJSON();
+    console.log(dateNow);
     try {
       dispatch(getDailyTotalOrders(dateNow));
       dispatch(getDailyPaypalIncome(dateNow));
@@ -24,21 +24,16 @@ const StatsContainer = () => {
   }, [dispatch])
   const loadStats = useCallback(async () => {
     try {
-        dispatch(PendingOrders());
-        } catch (error) {
-        console.log(error);
-        }
-    }, [dispatch]);
+      dispatch(PendingOrders());
+    } catch (error) {
+      console.log(error);
+    }
+  }, [dispatch]);
 
-    useEffect(() => {
-      loadStats();
-    }, [loadStats]);
+  useEffect(() => {
+    loadStats();
+  }, [loadStats]);
 
-    // if(isTotalPaypal || isTotalOrders || isTotalPending){
-    //   return (
-    //     <Loading />
-    //   )
-    // }
   return (
     // 
     <Wrapper>

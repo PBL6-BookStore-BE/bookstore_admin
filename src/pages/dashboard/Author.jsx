@@ -12,11 +12,11 @@ const Author = () => {
     const dispatch = useDispatch();
     const { authors} = useSelector((state) => state.getAll);
     const loadAuthor = useCallback(async () => {
-        try {
+      try {
         dispatch(listAuthors());
-        } catch (error) {
+      } catch (error) {
         console.log(error);
-        }
+      }
     }, [dispatch]);
 
     useEffect(() => {
