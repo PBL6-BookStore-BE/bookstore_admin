@@ -14,6 +14,7 @@ const StatsContainer = () => {
   
   useMemo(async () => {
     const dateNow = new Date().toJSON();
+    console.log(dateNow);
     try {
       dispatch(getDailyTotalOrders(dateNow));
       dispatch(getDailyPaypalIncome(dateNow));
