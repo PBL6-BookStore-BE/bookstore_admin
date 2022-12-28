@@ -139,14 +139,19 @@ const Stats = () => {
         </TabPanels>
       </Tabs>
       <Heading mt={14} mb={4} textAlign='left' size='md'>Recent Order</Heading>
-      <Table
-          colorScheme="purple"
-          totalRegisters={numDescending.length}
-          page={page}
-          onPageChange={(page) => setPage(page)}
-          columns={tableColumns}
-          data={tableData}
-      />
+      {numDescending.length===0
+        ? 
+          <Heading size='md' fontWeight='600' color='#8D28AD'>No order to display.....</Heading>
+        :
+          <Table
+              colorScheme="purple"
+              totalRegisters={numDescending.length}
+              page={page}
+              onPageChange={(page) => setPage(page)}
+              columns={tableColumns}
+              data={tableData}
+          />
+      }
     </>
   )
 }
